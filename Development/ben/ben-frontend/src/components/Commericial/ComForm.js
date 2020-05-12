@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "../../App.css"
 class ComForm extends React.Component{
     constructor(){
         super()
@@ -25,27 +25,36 @@ class ComForm extends React.Component{
     }
     render(){
         return(
-            <div>
-            <form handleOnSubmit={this.handleOnSubmit(e)}>
+            <div class="ComSquare">
+            <form handleOnSubmit={(e)=>this.handleOnSubmit(e)}>
                 <label htmlFor="name">Name of Enterprise:</label>
-                <input type="text" onChange={this.handleOnChange(e)} name="name"/>
+                <input type="text" onChange={(e)=>this.handleOnChange(e)} name="name"/>
+                <br/>
                 <label htmlFor="owner">Name of Owner:</label>
-                <input type="text" onChange={this.handleOnChange(e)}  name="owner"/>
+                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="owner"/>
+                <br/>
                 <label htmlFor="email">Email:</label>
-                <input type="text" onChange={this.handleOnChange(e)}  name="email"/>
+                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="email"/>
+                <br/>
+                <label htmlFor="maxOccupancy">Max Occupany:</label>
+                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="maxOccupancy"/>
+                <br/>
                 <label htmlFor="address">Address:</label>
-                <label htmlFor="maxOccupancy">City:</label>
-                <input type="text" onChange={this.handleOnChange(e)}  name="macOccupancy"/>
-                <input type="text" onChange={this.handleOnChange(e)}  name="address"/>
+                <input type="text" onChange={(e)=>this.handleOnChange(e)} name="address"/>
                 <label htmlFor="city">City:</label>
-                <input type="text" onChange={this.handleOnChange(e)}  name="city"/>
+                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="city"/>
+                <br/>
                 <label htmlFor="state">State</label>
-                <input type="text"  onChange={this.handleOnChange(e)} name="state"/>
+                <input type="text"  onChange={(e)=>this.handleOnChange(e)} name="state"/>
+                <label htmlFor="zipCode">Zip Code:</label>
+                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="zipCode"/> 
+                <br/>
                 <label htmlFor="password">Password:</label>
-                <input type="text"onChange={this.handleOnChange(e)}  name="password" />
+                <input type="text"onChange={(e)=>this.handleOnChange(e)}  name="password" />
                 <input type="submit"/>
             </form>
             </div>
         )
     }
 }
+export default ComForm

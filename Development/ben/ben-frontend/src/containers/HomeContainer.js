@@ -2,22 +2,23 @@ import React from 'react'
 import "../App.css"
 import {Button} from 'react-bootstrap'
 import LogInForm from "../components/Customers/LogInForm"
-class HomeContainer extends React.Component{
+import { useHistory, useLocation } from 'react-router-dom'
+const HomeContainer =()=> {
 
 
-
-    render(){
+   
+    let location= useLocation()
         return(<div>
             <div class="square">
                 <LogInForm class="LogInForm"/>
             <br/>
                 <h4 class="signUpStmt"> <u>Sign up below</u></h4>
             <div class="signIn-Btns">
-                 <button href="/signup" class="signUpBtn">Customer</button>
-                <button href="/business" class="btn-primary signUpBusinessBtn">Business</button>
+                 <a href="http://localhost:3001/signup" class="signUpBtn" value="Customer">Customer</a>
+                <a href= "http://localhost:3001/commercial" class="btn-primary signUpBusinessBtn" value="Business">Business</a>
             </div>
             </div>
         </div>)
-    }
 }
+
 export default HomeContainer
