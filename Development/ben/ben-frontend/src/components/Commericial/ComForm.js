@@ -1,4 +1,5 @@
 import React from 'react'
+import comSignUp from "../../actions/commercialActions"
 import "../../App.css"
 class ComForm extends React.Component{
     constructor(){
@@ -21,7 +22,7 @@ class ComForm extends React.Component{
     }
     handleOnSubmit = e =>{
         e.preventDefault()
-        this.props.comSignUp(this.state)    
+        comSignUp(this.state)    
     }
     render(){
         return(
@@ -51,7 +52,7 @@ class ComForm extends React.Component{
                 <br/>
                 <label htmlFor="password">Password:</label>
                 <input type="text"onChange={(e)=>this.handleOnChange(e)}  name="password" />
-                <input type="submit"/>
+                <input type="submit" value="Sign Up"/>
             </form>
             </div>
         )

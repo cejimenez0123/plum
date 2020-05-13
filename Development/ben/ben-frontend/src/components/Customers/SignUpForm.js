@@ -1,11 +1,13 @@
 import React from 'react'
+import signUp from "../../actions/commercialActions"
 export default class SignUpForm extends React.Component{
     constructor(){
         super()
             this.state={
                 name: "",
                 email:"",
-                password:""    
+                password:"",
+                type: "user"    
             }
     }
     handleOnChange = e =>{   
@@ -13,11 +15,10 @@ export default class SignUpForm extends React.Component{
     }
     handleOnSubmit = e =>{
         e.preventDefault()
-        this.props.signUp(this.state)    
+        signUp(this.state)    
     }
     render(){
         return(<div>
-            <NavbarContainer/>
                 <form className="SignUpForm" onSubmit={this.handleOnSubmit}> 
                     <label htmlFor="name">Name:</label>
                     <input type="text" name="name" 
@@ -28,10 +29,9 @@ export default class SignUpForm extends React.Component{
                     <br />
                     <label htmlFor="password">Password:</label>
                     <input type="password" name="password"  onChange={this.handleOnChange} />
-                    <br />
+                    <br/>
                     < input type="submit" value="Sign Up"/>
-                </form>
-                
+                </form>     
             </div>
         )
     }

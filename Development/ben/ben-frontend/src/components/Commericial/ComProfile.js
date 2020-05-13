@@ -1,12 +1,13 @@
 import React from 'react'
 
-class ComIndex extends React.Component{
+class ComProfile extends React.Component{
 
     render(){
         return(
             <div>
-
+                Com Profile
             </div>
         )
     }
 }
+export default ComProfile
