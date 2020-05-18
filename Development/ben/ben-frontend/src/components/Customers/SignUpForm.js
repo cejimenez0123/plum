@@ -1,5 +1,6 @@
 import React from 'react'
-import signUp from "../../actions/commercialActions"
+
+
 export default class SignUpForm extends React.Component{
     constructor(){
         super()
@@ -10,12 +11,14 @@ export default class SignUpForm extends React.Component{
                 type: "user"    
             }
     }
+    
     handleOnChange = e =>{   
         this.setState({[e.target["name"]]: e.target.value})
     }
     handleOnSubmit = e =>{
         e.preventDefault()
-        signUp(this.state)    
+        let user = this.state
+        this.props.signUp(user)    
     }
     render(){
         return(<div>

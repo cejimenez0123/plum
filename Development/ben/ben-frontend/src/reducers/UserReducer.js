@@ -1,9 +1,9 @@
-export default function ComReducer(
-    state={},
+export default function UserReducer(
+    state={currentUser: null},
     action){
     switch (action.type){ 
 
-        case "ADD_COM":
+        case "LOG_IN":
             return {state}
         default:
                 return state
