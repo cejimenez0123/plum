@@ -6,7 +6,7 @@ class CustomerProfile extends React.Component{
     render(){
         return(
             <div>
-                CustomerProfile
+                <h2>CustomerProfile</h2>
             </div>
         )
     }

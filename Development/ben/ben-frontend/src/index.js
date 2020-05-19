@@ -3,13 +3,14 @@ import React from 'react'
 import './index.css';
 import App from './App';
 import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import UserReducer from "./reducers/UserReducer"
 import ComReducer from './reducers/ComReducer'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 
-const rootReducer = combineReducers({com: ComReducer})
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const rootReducer = combineReducers({com: ComReducer, users: UserReducer})
+const store = createStore(rootReducer,compose( applyMiddleware(thunk),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

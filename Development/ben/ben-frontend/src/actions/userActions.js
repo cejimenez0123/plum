@@ -1,29 +1,36 @@
 import React from 'react'
-import {push} from 'react-router-redux'
 import { useDispatch } from "react-redux"
-let userPath = "http://localhost:3000/users"
+import history from "../history"
+let userPath = "http://127.0.0.1:3000/users"
 
-export default function useUserActions(){
-    
-    let dispatch = useDispatch()
-return {signUp: (user)=>{
-    debugger
+function useUserActions(){
+   
+return {signUp: (user)=>signUp(user)
+            
+             
+    }
+}
+
+function signUp(user){
+   
     let config = {
         method: 'POST',
         headers: {
+            
             'Content-Type': 'application/json',
-            Accept: "application/json; odata=verbose"
-
+            'Accept': 'application/json'
+        
             },
             body: JSON.stringify({
+                name: user.name,
                 email : user.email,
                 password: user.password,
-                type: user.type 
+                type: user.tipo 
             })}
-      fetch(userPath,config).then(res=>res.json()).then(obj=>{
-           
-            dispatch({type: "LOG_IN",obj}) 
-            push(`/users/${obj.id}`)
-       })}}
-}
-
+       return(dispatch)=>{fetch(userPath,config).then(res=>res.json()).then(user=>{ 
+            dispatch({type:"LOG_IN",user})
+            history.push(`/users/${user.id}`)
+           })}
+        }    
+            
+export { useUserActions,signUp }

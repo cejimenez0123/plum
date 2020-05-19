@@ -8,7 +8,7 @@ export default class SignUpForm extends React.Component{
                 name: "",
                 email:"",
                 password:"",
-                type: "user"    
+                tipo: "user"    
             }
     }
     
@@ -17,8 +17,11 @@ export default class SignUpForm extends React.Component{
     }
     handleOnSubmit = e =>{
         e.preventDefault()
+        debugger
         let user = this.state
-        this.props.signUp(user)    
+       this.props.signUp(user) 
+        
+
     }
     render(){
         return(<div>

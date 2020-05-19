@@ -1,10 +1,11 @@
 export default function UserReducer(
-    state={currentUser: null},
+    state={currentUser: null,loggedIn: false, users: []},
     action){
     switch (action.type){ 
 
         case "LOG_IN":
-            return {state}
+            debugger
+            return {state,currentUser: action.user,loggedIn: true}
         default:
                 return state
 

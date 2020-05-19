@@ -1,5 +1,6 @@
 import React from 'react'
 import comSignUp from "../../actions/commercialActions"
+
 import "../../App.css"
 class ComForm extends React.Component{
     constructor(){
@@ -21,13 +22,16 @@ class ComForm extends React.Component{
         this.setState({[e.target["name"]]: e.target.value})
     }
     handleOnSubmit = e =>{
+        debugger
         e.preventDefault()
-        comSignUp(this.state)    
+      this.props.signUp(this.state)
+        
+       
     }
     render(){
         return(
-            <div class="ComSquare">
-            <form handleOnSubmit={(e)=>this.handleOnSubmit(e)}>
+            <div className="ComSquare">
+            <form onSubmit={(e)=>this.handleOnSubmit(e)}>
                 <label htmlFor="name">Name of Enterprise:</label>
                 <input type="text" onChange={(e)=>this.handleOnChange(e)} name="name"/>
                 <br/>
