@@ -1,14 +1,19 @@
 import React from 'react'
 
-class CustomerProfile extends React.Component{
+const CustomerProfile =(props)=>{
 
-
-    render(){
+    const user =()=>{
+        if(props.currentUser){
+            debugger
+        }
+    }
+    
         return(
             <div>
                 <h2>CustomerProfile</h2>
+                {user()}
             </div>
         )
-    }
 }
+
 export default CustomerProfile

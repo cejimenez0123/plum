@@ -1,5 +1,7 @@
 import React from 'react'
 import { Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {logIn} from '../../actions/userActions'
 import "../../App.css"
 class LogInForm extends React.Component{
     constructor(){
@@ -16,7 +18,7 @@ class LogInForm extends React.Component{
     handleOnSubmit = e => {
         e.preventDefault()
        
-        // this.props.logIn(this.state)
+        this.props.logIn(this.state)
     }
     render(){
         return(
@@ -37,9 +39,9 @@ class LogInForm extends React.Component{
         )
     }
 }
-// function mapDispatchToProps(dispatch){
-//     return{
-//         logIn: (user)=>dispatch(LOG_IN(user))
-//     }
-// }
-export default (LogInForm)
+function mapDispatchToProps(dispatch){
+    return{
+        logIn: (user)=>dispatch(logIn(user))
+    }
+}
+export default connect(null,mapDispatchToProps)(LogInForm)

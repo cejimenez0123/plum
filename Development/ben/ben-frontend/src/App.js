@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import { Router, Route, Switch, Redirect} from 'react-router-dom';
 import HomeContainer from "./containers/HomeContainer"
 import ComForm from './components/Commericial/ComForm'
 import useCommercialActions from "./actions/commercialActions"
 import {connect, useStore} from 'react-redux'
 import { signUp ,useUserActions }from "./actions/userActions"
-
+import history from './history'
+import CustomerPortalContainer from "./containers/CustomerPortalContainer"
 import SignUpForm from "./components/Customers/SignUpForm"
 import ComProfile from "./components/Commericial/ComProfile"
 import CustomerProfile from "./components/Customers/CustomerProfile"
@@ -22,7 +23,7 @@ const loggedIn_=()=>{
 }
   return (
     <div className="">
-      <Router>
+      <Router history={history}>
         <Route exact path="/">
           <HomeContainer/>
         </Route>
@@ -33,11 +34,11 @@ const loggedIn_=()=>{
           <SignUpForm signUp={props.signUp}/>
         </Route>
         <Route path='/user/:id/commericial'>
-            <ComProfile />
+            <CustomerPortalContainer currentUser={props.currentUser}/>
         </Route>
         {loggedIn_()}
         <Route path='/users/:id'>
-            <CustomerProfile currentUser={props.currentUser}/>
+            
         </Route>
       </Router>
     </div>

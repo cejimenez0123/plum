@@ -4,9 +4,9 @@ import history from "../history"
 let userPath = "http://127.0.0.1:3000/users"
 
 function useUserActions(){
-   
-return {signUp: (user)=>signUp(user)
-            
+   let dispatch = useDispatch()
+return {signUp: (user)=>signUp(user),
+           logIn: (user)=>dispatch(logIn(user))
              
     }
 }
@@ -31,6 +31,24 @@ function signUp(user){
             dispatch({type:"LOG_IN",user})
             history.push(`/users/${user.id}`)
            })}
-        }    
+        }
+function logIn(user)   {
+    let config = {
+        method: 'POST',
+        headers: {
             
-export { useUserActions,signUp }
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        
+            },
+            body: JSON.stringify({       
+                email : user.email,
+                password: user.password,
+            })}
+       return(dispatch)=>{fetch("http://127.0.0.1:3000/login",config).then(res=>res.json()).then(user=>{ 
+            dispatch({type:"LOG_IN",user})
+            history.push(`/users/${user.id}`)
+           })}
+}
+            
+export { useUserActions,signUp,logIn }
