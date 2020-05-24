@@ -1,6 +1,6 @@
 import React from 'react'
 
-class CustomerPortalContainer extends React.Component{
+class CommercialoPrtalContainer extends React.Component{
 
 
     render(){
@@ -11,3 +11,4 @@ class CustomerPortalContainer extends React.Component{
         )
     }
 }
+export default CommercialoPrtalContainer

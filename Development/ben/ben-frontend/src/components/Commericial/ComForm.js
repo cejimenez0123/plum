@@ -7,14 +7,14 @@ class ComForm extends React.Component{
         super()
         this.state={
             name:"",
-            owner: "",
+
             maxOccupancy:"",
             address:"",
             city:"",
             state:"",
             zipcode:"",
             email: "",
-            password:""
+            password:"",
             
         }
     }
@@ -24,22 +24,16 @@ class ComForm extends React.Component{
     handleOnSubmit = e =>{
         debugger
         e.preventDefault()
-      this.props.signUp(this.state)
-        
+        this.props.addCom(this.state)
        
     }
     render(){
         return(
             <div className="ComSquare">
             <form onSubmit={(e)=>this.handleOnSubmit(e)}>
+                <h3><u>Commercial Form</u></h3>
                 <label htmlFor="name">Name of Enterprise:</label>
                 <input type="text" onChange={(e)=>this.handleOnChange(e)} name="name"/>
-                <br/>
-                <label htmlFor="owner">Name of Owner:</label>
-                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="owner"/>
-                <br/>
-                <label htmlFor="email">Email:</label>
-                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="email"/>
                 <br/>
                 <label htmlFor="maxOccupancy">Max Occupany:</label>
                 <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="maxOccupancy"/>
@@ -54,9 +48,9 @@ class ComForm extends React.Component{
                 <label htmlFor="zipCode">Zip Code:</label>
                 <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="zipCode"/> 
                 <br/>
-                <label htmlFor="password">Password:</label>
-                <input type="text"onChange={(e)=>this.handleOnChange(e)}  name="password" />
-                <input type="submit" value="Sign Up"/>
+                <input type="submit"/>
+              
+                
             </form>
             </div>
         )

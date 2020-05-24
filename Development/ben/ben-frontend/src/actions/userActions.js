@@ -25,11 +25,23 @@ function signUp(user){
                 name: user.name,
                 email : user.email,
                 password: user.password,
-                type: user.tipo 
+                tipo: user.tipo 
             })}
        return(dispatch)=>{fetch(userPath,config).then(res=>res.json()).then(user=>{ 
+       
             dispatch({type:"LOG_IN",user})
-            history.push(`/users/${user.id}`)
+            debugger
+            localStorage.setItem("currentUser",user.id)
+            switch (user.tipo){
+                case "user":
+                    history.push(`/users/${user.id}`)
+                case "owner":
+                    console.log("hit")
+                    history.push(`/users/${user.id}/coms`)
+                default:
+                    history.push(window.location.pathname)
+                }
+
            })}
         }
 function logIn(user)   {
@@ -45,10 +57,20 @@ function logIn(user)   {
                 email : user.email,
                 password: user.password,
             })}
-       return(dispatch)=>{fetch("http://127.0.0.1:3000/login",config).then(res=>res.json()).then(user=>{ 
-            dispatch({type:"LOG_IN",user})
-            history.push(`/users/${user.id}`)
-           })}
+       return(dispatch)=>{fetch("http://localhost:3000/login",config).then(res=>res.json()).then(user=>{ 
+        debugger    
+        dispatch({type:"LOG_IN",user})
+        
+            switch (user.tipo){
+                case "user":
+                    history.push(`/users/${user.id}`)
+                case "commercial":
+                    history.push(`/users/${user.id}/commerical`)
+                default:
+                    history.push(window.location.pathname)
+            }
+           }).catch(error=>{window.alert(error)
+        history.push(window.location.pathname)})}
 }
             
 export { useUserActions,signUp,logIn }

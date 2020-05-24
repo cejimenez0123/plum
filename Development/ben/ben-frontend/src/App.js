@@ -2,25 +2,24 @@ import React, { useState } from 'react';
 import { Router, Route, Switch, Redirect} from 'react-router-dom';
 import HomeContainer from "./containers/HomeContainer"
 import ComForm from './components/Commericial/ComForm'
-import useCommercialActions from "./actions/commercialActions"
+import {useCommercialActions, addCom} from "./actions/commercialActions"
 import {connect, useStore} from 'react-redux'
 import { signUp ,useUserActions }from "./actions/userActions"
 import history from './history'
 import CustomerPortalContainer from "./containers/CustomerPortalContainer"
-import SignUpForm from "./components/Customers/SignUpForm"
+import CommercialPortalContainer from "./containers/CommercialPortalContainer"
+import SignUpForm from "./components/Users/SignUpForm"
 import ComProfile from "./components/Commericial/ComProfile"
 import CustomerProfile from "./components/Customers/CustomerProfile"
+import PrivateRoute from "./PrivateRoute"
+import FormContainer from "./containers/FormContainer"
 import './App.css';
 let com
 let bot
 function App(props) {
   bot = useUserActions()
    com = useCommercialActions()
-const loggedIn_=()=>{
-  if (props.loggedIn){
-   return( <Redirect to={`/users/${props.currentUser.id}`} />)
-  }
-}
+
   return (
     <div className="">
       <Router history={history}>
@@ -28,18 +27,24 @@ const loggedIn_=()=>{
           <HomeContainer/>
         </Route>
         <Route path ="/commercial">
-              <ComForm signUp={props.signUp}/>
+              <ComForm signUp={props.comSignUp}/>
         </Route>
         <Route path="/user">
           <SignUpForm signUp={props.signUp}/>
         </Route>
-        <Route path='/user/:id/commericial'>
-            <CustomerPortalContainer currentUser={props.currentUser}/>
+        <Route path="/users/:id/commercial">
+          <CommercialPortalContainer/>
         </Route>
-        {loggedIn_()}
-        <Route path='/users/:id'>
-            
+        <Route path="/signup">
+          <FormContainer signUp={props.signUp}/>
         </Route>
+        <Route exact path='/users/:id/coms'>
+            <ComForm addCom={props.addCom} />
+        </Route>
+    
+        <PrivateRoute exact path='/users/:id'>
+        <CustomerPortalContainer currentUser={props.currentUser}/>
+        </PrivateRoute>
       </Router>
     </div>
   );
@@ -47,7 +52,8 @@ const loggedIn_=()=>{
 const mapDisToProps = (dispatch)=>{
   
   return {
-    signUp: (user)=> dispatch(bot.signUp(user))
+    signUp: (user)=> dispatch(bot.signUp(user)),
+    addCom: (com)=>dispatch(addCom(com))
   }
 }
 const mapStateToProps = (state)=>{

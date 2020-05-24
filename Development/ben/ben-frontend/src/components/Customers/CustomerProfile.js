@@ -11,7 +11,7 @@ const CustomerProfile =(props)=>{
         return(
             <div>
                 <h2>CustomerProfile</h2>
-                {user()}
+                {}
             </div>
         )
 }

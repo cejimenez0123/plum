@@ -8,16 +8,18 @@ export default class SignUpForm extends React.Component{
                 name: "",
                 email:"",
                 password:"",
-                tipo: "user"    
+                tipo: ""    
             }
     }
     
     handleOnChange = e =>{   
         this.setState({[e.target["name"]]: e.target.value})
+        console.log(this.state)
     }
+ 
     handleOnSubmit = e =>{
         e.preventDefault()
-        debugger
+     
         let user = this.state
        this.props.signUp(user) 
         
@@ -36,6 +38,18 @@ export default class SignUpForm extends React.Component{
                     <label htmlFor="password">Password:</label>
                     <input type="password" name="password"  onChange={this.handleOnChange} />
                     <br/>
+                    <div onChange={(e)=>this.handleOnChange(e)}>
+                        <h6> Sign Up As</h6>
+                         
+                        <input type="radio"  name="tipo" value="user"/>
+                        <label htmlFor="user">User</label>
+                        <br/>
+                        <input type="radio" name="tipo" value="owner"/>
+                        <label htmlFor="owner">Owner</label>
+                    </div>
+                         
+                        
+                    
                     < input type="submit" value="Sign Up"/>
                 </form>     
             </div>
