@@ -28,16 +28,18 @@ function signUp(user){
                 tipo: user.tipo 
             })}
        return(dispatch)=>{fetch(userPath,config).then(res=>res.json()).then(user=>{ 
-       
+            user = user.data.attributes
             dispatch({type:"LOG_IN",user})
-            debugger
+          
             localStorage.setItem("currentUser",user.id)
             switch (user.tipo){
                 case "user":
                     history.push(`/users/${user.id}`)
+                    break
                 case "owner":
                     console.log("hit")
                     history.push(`/users/${user.id}/coms`)
+                    break
                 default:
                     history.push(window.location.pathname)
                 }

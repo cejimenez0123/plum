@@ -1,7 +1,7 @@
 import { useCommercialActions } from "../actions/commercialActions"
 
 export default function ComReducer(
-    state={currentComs: null, allComs:[]},
+    state={currentComs: [], allComs:[]},
     action){
     switch (action.type){ 
         case "MY_COM":

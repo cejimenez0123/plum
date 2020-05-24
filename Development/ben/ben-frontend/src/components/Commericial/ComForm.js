@@ -7,14 +7,11 @@ class ComForm extends React.Component{
         super()
         this.state={
             name:"",
-
             maxOccupancy:"",
             address:"",
             city:"",
             state:"",
-            zipcode:"",
-            email: "",
-            password:"",
+            zipcode:""
             
         }
     }
@@ -22,7 +19,6 @@ class ComForm extends React.Component{
         this.setState({[e.target["name"]]: e.target.value})
     }
     handleOnSubmit = e =>{
-        debugger
         e.preventDefault()
         this.props.addCom(this.state)
        
@@ -46,7 +42,7 @@ class ComForm extends React.Component{
                 <label htmlFor="state">State</label>
                 <input type="text"  onChange={(e)=>this.handleOnChange(e)} name="state"/>
                 <label htmlFor="zipCode">Zip Code:</label>
-                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="zipCode"/> 
+                <input type="text" onChange={(e)=>this.handleOnChange(e)}  name="zipcode"/> 
                 <br/>
                 <input type="submit"/>
               

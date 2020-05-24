@@ -21,6 +21,7 @@ let comPath = "http://127.0.0.1:3000/commercials"
                 },
                 body: JSON.stringify({
                   name: com.name,
+                  owner: localStorage.getItem("currentUser"),
                   maxOccupancy: com.maxOccupancy,
                   address: com.address,
                   city: com.city,
@@ -30,8 +31,8 @@ let comPath = "http://127.0.0.1:3000/commercials"
            return(dispatch)=>{ fetch(comPath,config).then(res=>res.json()).then(com=>{
                 debugger
                 dispatch({type: "ADD_COM",com})
-                
-            })}
+                history.push(`/users/${localStorage.getItem("currentUser")}/commercial`)
+            }).catch()}
     }
     function getComs(){
         
