@@ -6,7 +6,9 @@ import history from '../history'
 let comPath = "http://127.0.0.1:3000/commercials"
 
 
- function useCommercialActions(){}
+ function useCommercialActions(){
+     return{getComs:()=>getComs()}
+ }
 
     function addCom(com){
         
@@ -34,11 +36,18 @@ let comPath = "http://127.0.0.1:3000/commercials"
                 history.push(`/users/${localStorage.getItem("currentUser")}/commercial`)
             }).catch()}
     }
+    function myCom(){
+
+        return(dispatch)=>{fetch(comPath+"/"+localStorage.getItem("currentUser")).then(res=>res.json()).then(coms=>{
+debugger
+        })}
+    }
     function getComs(){
         
         return(dispatch)=>{
             fetch(comPath).then(res=>res.json()).then(coms=>{
                 debugger
+                coms = coms.data
                 dispatch({type: "GET_COMS",coms})
 
             })
@@ -46,6 +55,6 @@ let comPath = "http://127.0.0.1:3000/commercials"
     }
 
 
-    export {useCommercialActions, addCom}
+    export {useCommercialActions, addCom,getComs}
             
        

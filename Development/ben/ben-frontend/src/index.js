@@ -9,7 +9,7 @@ import ComReducer from './reducers/ComReducer'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 
-const rootReducer = combineReducers({com: ComReducer, users: UserReducer})
+const rootReducer = combineReducers({coms: ComReducer, users: UserReducer})
 const store = createStore(rootReducer,compose( applyMiddleware(thunk),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 ReactDOM.render(
   <Provider store={store}>

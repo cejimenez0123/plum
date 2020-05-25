@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Router, Route, Switch, Redirect} from 'react-router-dom';
 import HomeContainer from "./containers/HomeContainer"
 import ComForm from './components/Commericial/ComForm'
-import {useCommercialActions, addCom} from "./actions/commercialActions"
+import {useCommercialActions, addCom,getComs} from "./actions/commercialActions"
 import {connect, useStore} from 'react-redux'
 import { signUp ,useUserActions }from "./actions/userActions"
 import history from './history'
@@ -43,7 +43,7 @@ function App(props) {
         </Route>
     
         <PrivateRoute exact path='/users/:id'>
-        <CustomerPortalContainer currentUser={props.currentUser}/>
+        <CustomerPortalContainer allComs={props.allComs} currentUser={props.currentUser} getComs={props.getComs}/>
         </PrivateRoute>
       </Router>
     </div>
@@ -53,13 +53,15 @@ const mapDisToProps = (dispatch)=>{
   
   return {
     signUp: (user)=> dispatch(bot.signUp(user)),
-    addCom: (com)=>dispatch(addCom(com))
+    addCom: (com)=>dispatch(addCom(com)),
+    getComs:()=>dispatch(com.getComs())
   }
 }
 const mapStateToProps = (state)=>{
   return{
     currentUser: state.users.currentUser,
-    loggedIn: state.users.loggedIn
+    loggedIn: state.users.loggedIn,
+    allComs: state.coms.allComs
 
   }
 }

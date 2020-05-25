@@ -29,11 +29,11 @@ function signUp(user){
             })}
        return(dispatch)=>{fetch(userPath,config).then(res=>res.json()).then(user=>{ 
             user = user.data.attributes
-            dispatch({type:"LOG_IN",user})
-          
             localStorage.setItem("currentUser",user.id)
+            dispatch({type:"LOG_IN",user})
             switch (user.tipo){
                 case "user":
+                    
                     history.push(`/users/${user.id}`)
                     break
                 case "owner":
@@ -61,12 +61,13 @@ function logIn(user)   {
             })}
        return(dispatch)=>{fetch("http://localhost:3000/login",config).then(res=>res.json()).then(user=>{ 
         debugger    
+        user = user.data.attributes
         dispatch({type:"LOG_IN",user})
         
             switch (user.tipo){
                 case "user":
                     history.push(`/users/${user.id}`)
-                case "commercial":
+                case "owner":
                     history.push(`/users/${user.id}/commerical`)
                 default:
                     history.push(window.location.pathname)
