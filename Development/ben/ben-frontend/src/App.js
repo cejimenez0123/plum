@@ -33,7 +33,7 @@ function App(props) {
           <SignUpForm signUp={props.signUp}/>
         </Route>
         <Route path="/users/:id/commercial">
-          <CommercialPortalContainer/>
+          <CommercialPortalContainer myComs={props.myComs}/>
         </Route>
         <Route path="/signup">
           <FormContainer signUp={props.signUp}/>
@@ -54,14 +54,15 @@ const mapDisToProps = (dispatch)=>{
   return {
     signUp: (user)=> dispatch(bot.signUp(user)),
     addCom: (com)=>dispatch(addCom(com)),
-    getComs:()=>dispatch(com.getComs())
+    getComs:()=>dispatch(com.getComs()),
+    myComs: ()=>dispatc(com.myComs())
   }
 }
 const mapStateToProps = (state)=>{
   return{
     currentUser: state.users.currentUser,
     loggedIn: state.users.loggedIn,
-    allComs: state.coms.allComs
+    allComs: state.coms.allComs,
 
   }
 }
