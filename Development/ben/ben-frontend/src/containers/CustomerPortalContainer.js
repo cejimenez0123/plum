@@ -11,7 +11,7 @@ class CustomerPortalContainer extends React.Component{
             <div>
                 <ProfileCard currentUser={this.props.currentUser}/>
                 <CustomerProfile currentUser={this.props.currentUser}/>
-                <ComIndex allComs={this.props.allComs}/>
+                <ComIndex allComs={this.props.allComs} />
             </div>
         )
     }
