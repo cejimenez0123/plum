@@ -1,0 +1,19 @@
+{
+  "name": "myfirst-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "demo_db.js",
+  "dependencies": {
+    "formidable": "^1.2.2",
+    "mongodb": "^3.5.8",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
