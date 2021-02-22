@@ -47,20 +47,19 @@ struct CanvasView: View {
       func makeCoordinator() -> Coordinator {
           Coordinator(self)
       }
-
+    var ink:PKInkingTool{
+        PKInkingTool(type,color: color)
+    }
+    let eraser = PKEraserTool(.bitmap)
       func makeUIView(context: Context) -> PKCanvasView {
-          let canvas = PKCanvasView()
-          canvas.tool = PKInkingTool(.pen, color: color, width: 10)
-
-          canvas.delegate = context.coordinator
+        canvas.drawingPolicy = .anyInput
+        canvas.tool = isDraw ? ink : eraser
           return canvas
       }
 
     func updateUIView(_ canvasView: PKCanvasView, context: Context) {
-            if clear != context.coordinator.pkCanvas.clear{
-                canvasView.drawing = PKDrawing()
-            }
-            canvasView.tool = PKInkingTool(.pen, color: color, width: 10)
+        canvasView.tool = isDraw ? ink : eraser
+        
         }
 
   }
