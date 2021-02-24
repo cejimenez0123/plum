@@ -24,15 +24,19 @@ class User: ObservableObject,Codable{
     }
 }
 struct ContentView: View {
-    
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+        @State private var selectedImage: UIImage?
+        @State private var isImagePickerDisplay = false
 @State var canvasView = false
     var body: some View {
-        Button("Show Canvas"){
+        VStack{
+       Text("hello")
+            Button("Show Canvas"){
             canvasView.toggle()
         }.sheet(isPresented: $canvasView, content: {
             CanvasView()
         })
-        
+        }
     }
 
 //    private func addItem() {

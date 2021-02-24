@@ -16,15 +16,24 @@ struct CanvasView: View {
     @State var isDraw=true
     @State var colorPicker = false
       var body: some View {
-        
+        NavigationView{
+            
           VStack{
-            PKCanvas(canvas: $canvas,isDraw: $isDraw, color: $color,type: $type, clear:$clear)
+            PKCanvas(canvas: $canvas, isDraw: $isDraw, color: $color,type: $type, clear:$clear)
+               
               VStack(){
                   Button("Change to BLUE"){ self.color = UIColor.blue }
                   Button("Change to GREEN"){ self.color = UIColor.green }
                   Button("Clear Canvas"){ self.clear.toggle() }
               }
           }
+          .navigationBarItems(trailing: Button(action:{ isDraw.toggle()}){
+            Image(systemName: "pencil.slash")
+                .font(.title)
+          })
+           
+                
+        }
       }
     
 }

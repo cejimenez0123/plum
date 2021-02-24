@@ -16,6 +16,7 @@
 		358A9F1525E00C960073136B /* plumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358A9F1425E00C960073136B /* plumTests.swift */; };
 		358A9F2025E00C960073136B /* plumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358A9F1F25E00C960073136B /* plumUITests.swift */; };
 		358A9F3125E00CBD0073136B /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358A9F3025E00CBD0073136B /* CanvasView.swift */; };
+		35ABDA9A25E429BB00FDD6E0 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABDA9925E429BB00FDD6E0 /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		358A9F1F25E00C960073136B /* plumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = plumUITests.swift; sourceTree = "<group>"; };
 		358A9F2125E00C960073136B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		358A9F3025E00CBD0073136B /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		35ABDA9925E429BB00FDD6E0 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				358A9F0825E00C950073136B /* plum.xcdatamodeld */,
 				358A9F0325E00C950073136B /* Preview Content */,
 				358A9F3025E00CBD0073136B /* CanvasView.swift */,
+				35ABDA9925E429BB00FDD6E0 /* ImagePickerView.swift */,
 			);
 			path = plum;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				358A9F0025E00C940073136B /* ContentView.swift in Sources */,
 				358A9F3125E00CBD0073136B /* CanvasView.swift in Sources */,
 				358A9EFE25E00C940073136B /* plumApp.swift in Sources */,
+				35ABDA9A25E429BB00FDD6E0 /* ImagePickerView.swift in Sources */,
 				358A9F0A25E00C950073136B /* plum.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
