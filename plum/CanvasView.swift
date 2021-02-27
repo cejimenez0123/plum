@@ -79,8 +79,9 @@ struct CanvasView: View {
 //    @State var canvas = PKCanvasView()
     @State var type : PKInkingTool.InkType = .pencil
     @State var isDraw=true
-    
+    @State var page:Page
     @State var colorPicker = false
+    @State var imagePicked:Image?
     @State var showImagePicker = false
       var body: some View {
         
@@ -93,7 +94,7 @@ struct CanvasView: View {
                             
                         HStack(spacing:30){
                             Spacer()
-                            Canvas(images:[],inputImage: <#T##Binding<Image?>#>)
+                            Canvas(images:$page.images,inputImage: $imagePicked)
                             
                             ZStack{
                             
