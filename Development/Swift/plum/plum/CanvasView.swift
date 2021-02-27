@@ -8,42 +8,67 @@
 import SwiftUI
 import PencilKit
 import UIKit
+struct ImagePicker: UIViewControllerRepresentable {
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        let parent: ImagePicker
 
-//struct TextView:UIViewRepresentable{
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+    }
+    
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var image: UIImage?
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        return picker
+    }
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+
+    }
+}
+struct TextView:UIViewRepresentable{
+
+    @Binding var text: String
+    @Binding var textStyle: UIFont.TextStyle
+
+
+
+
+    @Binding var width:NSLayoutDimension
+       func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100), textContainer: nil)
+
+           textView.font = UIFont.preferredFont(forTextStyle: textStyle)
+           textView.autocapitalizationType = .sentences
+           textView.isSelectable = true
+        textView.isScrollEnabled=false
+           textView.isUserInteractionEnabled = true
+
+           return textView
+       }
+
+       func updateUIView(_ uiView: UITextView, context: Context) {
+           uiView.text = text
+
+
+           uiView.font = UIFont.preferredFont(forTextStyle: textStyle)
+       }
 //
-//    @Binding var text: String
-//    @Binding var textStyle: UIFont.TextStyle
-//
-//
-//
-//
-////    @Binding var width:NSLayoutDimension
-////       func makeUIView(context: Context) -> UITextView {
-////        let textView = UITextView(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100), textContainer: nil)
-////
-////           textView.font = UIFont.preferredFont(forTextStyle: textStyle)
-////           textView.autocapitalizationType = .sentences
-////           textView.isSelectable = true
-////        textView.isScrollEnabled=false
-////           textView.isUserInteractionEnabled = true
-////
-////           return textView
-////       }
-//
-//       func updateUIView(_ uiView: UITextView, context: Context) {
-//           uiView.text = text
-//
-//
-//           uiView.font = UIFont.preferredFont(forTextStyle: textStyle)
-//       }
-////
-//}
+}
 struct Canvas:View{
    
-    @State var bodyFont: UIFont.TextStyle
+    
+    @Binding var images:[Image]?
+    @Binding var inputImage: Image?
     var body: some View {
-        Color.red
-            .frame(width:300,height:350)
+        ZStack{
+        Color.white
+            .frame(width:300,height:350)}
     }
     
    
@@ -54,7 +79,9 @@ struct CanvasView: View {
 //    @State var canvas = PKCanvasView()
     @State var type : PKInkingTool.InkType = .pencil
     @State var isDraw=true
+    
     @State var colorPicker = false
+    @State var showImagePicker = false
       var body: some View {
         
             
@@ -66,14 +93,18 @@ struct CanvasView: View {
                             
                         HStack(spacing:30){
                             Spacer()
-                        Canvas(bodyFont:.body)
+                            Canvas(images:[],inputImage: <#T##Binding<Image?>#>)
                             
                             ZStack{
                             
                             
                             List{
-                                Image(systemName:"textbox")
+                                
+                                Button(action:{ self.showImagePicker=true}){
+                                    Image(systemName:"textbox")
+                                }
                                 Image(systemName: "pencil")
+                                Image(systemName:"camera.fill")
                             }
                             }
                         
