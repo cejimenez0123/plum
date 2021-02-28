@@ -15,6 +15,11 @@ struct ImagePicker: UIViewControllerRepresentable {
         init(_ parent: ImagePicker) {
             self.parent = parent
         }
+        func imagePickerController( _ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+            if let uiImage = info[.originalImage] as? UIImage {
+                parent.image = uiImage
+            }
+        }
     }
     
     @Environment(\.presentationMode) var presentationMode
@@ -22,6 +27,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
         return picker
     }
     func makeCoordinator() -> Coordinator {
@@ -63,8 +69,8 @@ struct TextView:UIViewRepresentable{
 struct Canvas:View{
    
     
-    @Binding var images:[Image]?
-    @Binding var inputImage: Image?
+    @Binding var images:[Image]?;
+    @Binding var inputImage: UIImage?;
     var body: some View {
         ZStack{
         Color.white
@@ -79,9 +85,10 @@ struct CanvasView: View {
 //    @State var canvas = PKCanvasView()
     @State var type : PKInkingTool.InkType = .pencil
     @State var isDraw=true
-    @State var page:Page
+//    @State var page:Page
+    @State var images :[Image]?
     @State var colorPicker = false
-    @State var imagePicked:Image?
+    @State var imagePicked:UIImage?
     @State var showImagePicker = false
       var body: some View {
         
@@ -94,18 +101,21 @@ struct CanvasView: View {
                             
                         HStack(spacing:30){
                             Spacer()
-                            Canvas(images:$page.images,inputImage: $imagePicked)
+                            Canvas(images:$images,inputImage: $imagePicked)
                             
                             ZStack{
                             
                             
                             List{
                                 
-                                Button(action:{ self.showImagePicker=true}){
-                                    Image(systemName:"textbox")
-                                }
+                               
                                 Image(systemName: "pencil")
-                                Image(systemName:"camera.fill")
+                                Image(systemName:"textbox")
+                                Button(action:{ showImagePicker=true}){
+                                    Image(systemName:"camera.fill")
+                                }.sheet(isPresented: $showImagePicker, content: {
+                                    ImagePicker(image:$imagePicked)
+                                })
                             }
                             }
                         
