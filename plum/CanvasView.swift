@@ -19,6 +19,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             if let uiImage = info[.originalImage] as? UIImage {
                 parent.image = uiImage
             }
+            parent.presentationMode.wrappedValue.dismiss()
         }
     }
     
@@ -66,54 +67,54 @@ struct TextView:UIViewRepresentable{
        }
 //
 }
+
 struct Canvas:View{
    
     
-    @Binding var images:[Image]?;
+    @Binding var images:[UIImage]?;
     @Binding var inputImage: UIImage?;
+    @Binding var imageLoading:Bool
     var body: some View {
         ZStack{
         Color.white
-            .frame(width:300,height:350)}
+            .frame(width:300,height:350)
+        
+            inputImage.map {
+                            ImageBoxView(image: $0)
+                                
+                        }
+        }
     }
-    
    
 };
 struct CanvasView: View {
     @State var color = UIColor.black
       @State var clear = false
+    @State var image:UIImage?
 //    @State var canvas = PKCanvasView()
     @State var type : PKInkingTool.InkType = .pencil
     @State var isDraw=true
 //    @State var page:Page
-    @State var images :[Image]?
+    @State var images :[UIImage]?
     @State var colorPicker = false
     @State var imagePicked:UIImage?
     @State var showImagePicker = false
+    @State var imagePickLoading=false
       var body: some View {
-        
-            
-                
                     ZStack{
                         Image("transparent")
                             .resizable()
                             .ignoresSafeArea()
-                            
-                        HStack(spacing:30){
+                        HStack(spacing:20){
                             Spacer()
-                            Canvas(images:$images,inputImage: $imagePicked)
-                            
+                            Canvas(images:$images,inputImage: $image,imageLoading: $imagePickLoading)
                             ZStack{
-                            
-                            
-                            List{
-                                
-                               
-                                Image(systemName: "pencil")
-                                Image(systemName:"textbox")
-                                Button(action:{ showImagePicker=true}){
+                                List{
+                                    Image(systemName: "pencil")
+                                    Image(systemName:"textbox")
+                                    Button(action:{ showImagePicker=true}){
                                     Image(systemName:"camera.fill")
-                                }.sheet(isPresented: $showImagePicker, content: {
+                                }.sheet(isPresented: $showImagePicker,onDismiss: loadImage, content: {
                                     ImagePicker(image:$imagePicked)
                                 })
                             }
@@ -121,7 +122,8 @@ struct CanvasView: View {
                         
                         
                     
-                        
+                            
+                            
                         
                 
                 
@@ -145,6 +147,11 @@ struct CanvasView: View {
         }
         
       }
+    func loadImage(){
+        guard let inputImage = imagePicked else{return}
+        
+        image = inputImage
+    }
     
 }
   
