@@ -8,7 +8,7 @@
 import SwiftUI
 class ToolView: UITableView{
     let tools = ["pencil","textarea","photo"]
-    let toolImages = [UIImage]()
+    var toolImages = [UIImage]()
         
 
    
@@ -21,7 +21,6 @@ class ToolView: UITableView{
     }
    
     override func numberOfRows(inSection section: Int) -> Int {
-        <#code#>
         return tools.count
     }
     required init?(coder: NSCoder) {

@@ -24,6 +24,7 @@
                     <navigationItem key="navigationItem" id="HoN-Bl-jZF"/>
                     <connections>
                         <outlet property="BackgroundView" destination="8bC-Xf-vdC" id="nxL-QV-n7z"/>
+                        <segue destination="x4g-ak-oUi" kind="show" id="K7J-Np-LuZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -53,6 +54,7 @@
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <color key="tintColor" systemColor="systemGray6Color"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Vbr-YH-XF8"/>
                     <connections>
                         <outlet property="TableView" destination="dDy-KB-rku" id="XgP-HW-HPp"/>
                     </connections>

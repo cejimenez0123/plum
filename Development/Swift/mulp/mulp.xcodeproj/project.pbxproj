@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		358F37C925F2CD1600F44CB7 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358F37C825F2CD1600F44CB7 /* CanvasViewController.swift */; };
+		359B6420260FAA5C00BD220D /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B641F260FAA5C00BD220D /* SlideInPresentationManager.swift */; };
 		35ABDB0225E8350600FDD6E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABDB0125E8350600FDD6E0 /* AppDelegate.swift */; };
 		35ABDB0425E8350600FDD6E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABDB0325E8350600FDD6E0 /* SceneDelegate.swift */; };
 		35ABDB0625E8350600FDD6E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABDB0525E8350600FDD6E0 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		358F37C825F2CD1600F44CB7 /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
+		359B641F260FAA5C00BD220D /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
 		35ABDAFE25E8350600FDD6E0 /* mulp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mulp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35ABDB0125E8350600FDD6E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35ABDB0325E8350600FDD6E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		359B641B260FA97700BD220D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				358F37C825F2CD1600F44CB7 /* CanvasViewController.swift */,
+				35ABDB0525E8350600FDD6E0 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		359B641C260FA98D00BD220D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		359B641D260FA9B100BD220D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		359B641E260FA9BE00BD220D /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				359B641F260FAA5C00BD220D /* SlideInPresentationManager.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		35ABDAF525E8350500FDD6E0 = {
 			isa = PBXGroup;
 			children = (
@@ -105,16 +138,18 @@
 		35ABDB0025E8350600FDD6E0 /* mulp */ = {
 			isa = PBXGroup;
 			children = (
+				359B641E260FA9BE00BD220D /* Presentation */,
+				359B641D260FA9B100BD220D /* View */,
 				35ABDB0125E8350600FDD6E0 /* AppDelegate.swift */,
 				35ABDB0325E8350600FDD6E0 /* SceneDelegate.swift */,
-				35ABDB0525E8350600FDD6E0 /* ViewController.swift */,
+				359B641C260FA98D00BD220D /* Model */,
+				359B641B260FA97700BD220D /* Controller */,
 				35ABDB0725E8350600FDD6E0 /* Main.storyboard */,
 				35ABDB0D25E8350A00FDD6E0 /* Assets.xcassets */,
 				35ABDB0F25E8350A00FDD6E0 /* LaunchScreen.storyboard */,
 				35ABDB1225E8350A00FDD6E0 /* Info.plist */,
 				35ABDB0A25E8350600FDD6E0 /* mulp.xcdatamodeld */,
 				35ABDB3F25E8359300FDD6E0 /* CanvasView.swift */,
-				358F37C825F2CD1600F44CB7 /* CanvasViewController.swift */,
 			);
 			path = mulp;
 			sourceTree = "<group>";
@@ -273,6 +308,7 @@
 				35ABDB4025E8359300FDD6E0 /* CanvasView.swift in Sources */,
 				35ABDB0425E8350600FDD6E0 /* SceneDelegate.swift in Sources */,
 				35ABDB0C25E8350600FDD6E0 /* mulp.xcdatamodeld in Sources */,
+				359B6420260FAA5C00BD220D /* SlideInPresentationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
