@@ -13,11 +13,11 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem(UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addCanvas))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addCanvas))
         // Do any additional setup after loading the view.
     }
     
-    func addCanvas(){
+    @objc func addCanvas(){
         
     }
 }
