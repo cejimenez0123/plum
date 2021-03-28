@@ -21,11 +21,12 @@ class ViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Page", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Page", for: indexPath) as! PageTableViewCell
+        cell.pageName.text = pages[indexPath.row].name
         return cell
     }
     @objc func addCanvas(){
-        let controller = self.storyboard?.instantiateViewController(identifier: "CanvasViewControler") as! CanvasViewController
+        let controller = self.storyboard?.instantiateViewController(identifier: "CanvasViewController") as! CanvasViewController
         self.navigationController?.pushViewController(controller, animated: true)
         
     }

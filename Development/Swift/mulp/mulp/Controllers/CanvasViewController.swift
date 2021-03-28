@@ -11,7 +11,7 @@ import UIKit
 class CanvasViewController: UIViewController{
     
     
-    @IBOutlet var TableView: UITableView!
+    
     
     
     override func loadView(){
