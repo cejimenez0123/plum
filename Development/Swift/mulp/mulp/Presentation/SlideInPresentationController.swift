@@ -73,29 +73,12 @@ final class SlideInPresentationController: UIPresentationController {
       self.dimmingView.alpha = 0.0
     })
   }
-  override var frameOf
+
   override func containerViewWillLayoutSubviews() {
     presentedView?.frame = frameOfPresentedViewInContainerView
   }
-    override var frameOfPresentedViewInContainerView: CGRect {
-      //1
-      var frame: CGRect = .zero
-      frame.size = size(forChildContentContainer: presentedViewController,
-                        withParentContainerSize: containerView!.bounds.size)
+    
 
-      //2
-      switch direction {
-      case .right:
-        frame.origin.x = containerView!.frame.width*(1.0/3.0)
-      case .bottom:
-        frame.origin.y = containerView!.frame.height*(1.0/3.0)
-      default:
-        frame.origin = .zero
-      }
-      return frame
-    }
-
-  override func frameOf
   override func size(forChildContentContainer container: UIContentContainer,
                      withParentContainerSize parentSize: CGSize) -> CGSize {
     switch direction {
@@ -105,6 +88,9 @@ final class SlideInPresentationController: UIPresentationController {
       return CGSize(width: parentSize.width, height: parentSize.height*(2.0/3.0))
     }
   }
+    
+    
+    
 }
 
 // MARK: - Private

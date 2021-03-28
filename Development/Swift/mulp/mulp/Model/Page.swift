@@ -7,13 +7,10 @@
 
 import UIKit
 
-class Page: NSObject,Identifiable {
-    let id = UUID()
-    var canvas: CanvasView
-    init(canvas: CanvasView){
-        
-        super.init()
-    }
+struct Page: Codable{
+    var id = UUID()
+    let name: String
+
 }
 
 
