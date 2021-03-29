@@ -10,8 +10,8 @@ import UIKit
 
 class CanvasViewController: UIViewController{
     
-    
-    var page:Page
+
+    var name: String = "Untitled"
     @IBOutlet var CanvasView: CanvasView!
     
     

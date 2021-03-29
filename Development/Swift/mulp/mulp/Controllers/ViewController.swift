@@ -35,7 +35,7 @@ class ViewController: UITableViewController {
         let controller = self.storyboard?.instantiateViewController(identifier: "CanvasViewController") as! CanvasViewController
         pages.append(page)
         controller.CanvasView = page.canvas.canvasView
-        controller.page = page
+        controller.name = page.name
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }
