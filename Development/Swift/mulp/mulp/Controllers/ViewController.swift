@@ -10,9 +10,13 @@ import UIKit
 class ViewController: UITableViewController {
     var pages = [Page]()
  
+    @IBAction func sequeCanvas(_ sender: Any) {
+        
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.title = "Hope"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addCanvas))
         // Do any additional setup after loading the view.
     }
@@ -26,9 +30,13 @@ class ViewController: UITableViewController {
         return cell
     }
     @objc func addCanvas(){
-        let controller = self.storyboard?.instantiateViewController(identifier: "CanvasViewController") as! CanvasViewController
-        self.navigationController?.pushViewController(controller, animated: true)
+        let page =  Page(id: UUID(), name: "HOPE", canvas: Canvas(image: nil, canvasView: CanvasView(frame: CGRect(x: 20, y: 20, width: 100, height: 100))))
         
+        let controller = self.storyboard?.instantiateViewController(identifier: "CanvasViewController") as! CanvasViewController
+        pages.append(page)
+        controller.CanvasView = page.canvas.canvasView
+        controller.page = page
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 

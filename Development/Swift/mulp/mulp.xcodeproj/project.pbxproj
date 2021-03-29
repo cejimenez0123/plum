@@ -13,6 +13,7 @@
 		359B642D260FCDAA00BD220D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B642C260FCDAA00BD220D /* Page.swift */; };
 		359B643B2610D47800BD220D /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B643A2610D47700BD220D /* SlideInPresentationAnimator.swift */; };
 		359B64432610DF6600BD220D /* PageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B64422610DF6600BD220D /* PageTableViewCell.swift */; };
+		359B644B2610EFFD00BD220D /* ToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B644A2610EFFC00BD220D /* ToolViewController.swift */; };
 		35ABDB0225E8350600FDD6E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABDB0125E8350600FDD6E0 /* AppDelegate.swift */; };
 		35ABDB0425E8350600FDD6E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABDB0325E8350600FDD6E0 /* SceneDelegate.swift */; };
 		35ABDB0625E8350600FDD6E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABDB0525E8350600FDD6E0 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		359B642C260FCDAA00BD220D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		359B643A2610D47700BD220D /* SlideInPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationAnimator.swift; sourceTree = "<group>"; };
 		359B64422610DF6600BD220D /* PageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTableViewCell.swift; sourceTree = "<group>"; };
+		359B644A2610EFFC00BD220D /* ToolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolViewController.swift; sourceTree = "<group>"; };
 		35ABDAFE25E8350600FDD6E0 /* mulp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mulp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35ABDB0125E8350600FDD6E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35ABDB0325E8350600FDD6E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				358F37C825F2CD1600F44CB7 /* CanvasViewController.swift */,
 				35ABDB0525E8350600FDD6E0 /* ViewController.swift */,
+				359B644A2610EFFC00BD220D /* ToolViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -112,6 +115,7 @@
 		359B641D260FA9B100BD220D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35ABDB3F25E8359300FDD6E0 /* CanvasView.swift */,
 				359B64422610DF6600BD220D /* PageTableViewCell.swift */,
 			);
 			path = Views;
@@ -161,7 +165,6 @@
 				35ABDB0F25E8350A00FDD6E0 /* LaunchScreen.storyboard */,
 				35ABDB1225E8350A00FDD6E0 /* Info.plist */,
 				35ABDB0A25E8350600FDD6E0 /* mulp.xcdatamodeld */,
-				35ABDB3F25E8359300FDD6E0 /* CanvasView.swift */,
 			);
 			path = mulp;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				358F37C925F2CD1600F44CB7 /* CanvasViewController.swift in Sources */,
 				35ABDB0225E8350600FDD6E0 /* AppDelegate.swift in Sources */,
 				35ABDB4025E8359300FDD6E0 /* CanvasView.swift in Sources */,
+				359B644B2610EFFD00BD220D /* ToolViewController.swift in Sources */,
 				359B643B2610D47800BD220D /* SlideInPresentationAnimator.swift in Sources */,
 				35ABDB0425E8350600FDD6E0 /* SceneDelegate.swift in Sources */,
 				359B642D260FCDAA00BD220D /* Page.swift in Sources */,
