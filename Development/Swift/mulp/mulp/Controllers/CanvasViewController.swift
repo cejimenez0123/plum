@@ -14,16 +14,7 @@ class CanvasViewController: UIViewController{
     var name: String = "Untitled"
     @IBOutlet var CanvasView: CanvasView!
     
-    
-    override func loadView(){
-    
-//        view = UIView()
-//        let canvas = UIView()
-//        
-//        view.backgroundColor = .gray
-//        canvas.backgroundColor = .white
-//        view.subviews(canvas)
-        
-        
-    }
+ 
+
+  
 }
