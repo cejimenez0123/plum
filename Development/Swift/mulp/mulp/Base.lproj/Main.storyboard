@@ -65,19 +65,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qIN-L6-pnk">
-                                <rect key="frame" x="87" y="359" width="240" height="128"/>
+                                <rect key="frame" x="87" y="226" width="240" height="319"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yD4-a4-gko">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <items>
+                                    <barButtonItem title="Textbox" image="textbox" catalog="system" id="Jvr-S6-aup">
+                                        <connections>
+                                            <action selector="addTextbox:" destination="l3f-he-DWh" id="TL8-HG-brJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Item" image="photo.fill" catalog="system" id="ixe-GL-AML">
+                                        <connections>
+                                            <action selector="addPhoto:" destination="l3f-he-DWh" id="LPU-Oz-UKz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="pencil" image="pencil" catalog="system" id="G35-Nb-QqB"/>
+                                </items>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hYL-7n-fhb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
                     </view>
                     <navigationItem key="navigationItem" id="1K0-Bd-U1T"/>
+                    <connections>
+                        <outlet property="CanvasView" destination="qIN-L6-pnk" id="BEo-gm-GKq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Epq-3m-Nxm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4506" y="-200"/>
+            <point key="canvasLocation" x="4505.7971014492759" y="-200.22321428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ABQ-p3-1EX">
@@ -99,7 +121,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="pencil.slash" catalog="system" width="128" height="113"/>
+        <image name="photo.fill" catalog="system" width="128" height="93"/>
+        <image name="textbox" catalog="system" width="128" height="91"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -12,9 +12,15 @@ class CanvasViewController: UIViewController{
     
 
     var name: String = "Untitled"
-    @IBOutlet var CanvasView: CanvasView!
-    
- 
 
-  
+    @IBOutlet var CanvasView: UIView!
+    
+
+    @IBAction func addPhoto(_ sender: UIBarButtonItem) {
+    }
+    @IBAction func addTextbox(_ sender: UIBarButtonItem) {
+    }
+    
+    
 }
+
