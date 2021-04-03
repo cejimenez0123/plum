@@ -8,16 +8,40 @@
 import Foundation
 import UIKit
 
-class CanvasViewController: UIViewController{
+class CanvasViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
 
     var name: String = "Untitled"
-
+    let imagePicker = UIImagePickerController()
     @IBOutlet var CanvasView: UIView!
-    
+    override func viewDidLoad() {
+           super.viewDidLoad()
+
+           imagePicker.delegate = self
+       }
 
     @IBAction func addPhoto(_ sender: UIBarButtonItem) {
+        imagePicker.allowsEditing = true
+            imagePicker.sourceType = .photoLibrary
+                
+        present(imagePicker, animated: true, completion: nil)
+        
     }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.dismiss(animated: true, completion: { () -> Void in
+
+                    })
+            let imageView = UIImageView(frame: CGRect(x: 20, y: 20, width: pickedImage.size.width, height: pickedImage.size.height))
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = pickedImage
+            view.addSubview(imageView)
+            
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+                dismiss(animated: true, completion: nil)
+            }
     @IBAction func addTextbox(_ sender: UIBarButtonItem) {
     }
     
