@@ -41,6 +41,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="52j-5r-cFY">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="photo" catalog="system" id="MoN-nb-AaD">
+                            <connections>
+                                <action selector="openImagePicker:" destination="c5z-Hg-IXe" id="y1W-cR-qhf"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Create" image="pencil.slash" catalog="system" id="YMw-Nh-7ff">
                             <connections>
                                 <action selector="barButtonTapped:" destination="c5z-Hg-IXe" id="WE3-BA-m4q"/>
@@ -50,6 +55,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="BarButtonItem" destination="YMw-Nh-7ff" id="xny-Y4-CaW"/>
+                        <outlet property="LeftButton" destination="MoN-nb-AaD" id="8YA-6g-6wQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uvd-I0-lLN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -123,6 +129,7 @@
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="pencil.slash" catalog="system" width="128" height="113"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
         <image name="textbox" catalog="system" width="128" height="91"/>
         <systemColor name="linkColor">

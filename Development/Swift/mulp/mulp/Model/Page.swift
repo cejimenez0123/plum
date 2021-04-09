@@ -10,9 +10,13 @@ import UIKit
 struct Page{
     var id = UUID()
     let name: String
-    var canvas: Canvas
+    var canvas: UIImage
 }
-
+struct Book {
+    var id = UUID()
+    var title:String=""
+    var pages: [Page]
+}
 struct Canvas{
     var image: UIImage?
     var canvasView: CanvasView
