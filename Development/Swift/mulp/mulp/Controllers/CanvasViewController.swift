@@ -64,26 +64,3 @@ class CanvasViewController: UIViewController,UIImagePickerControllerDelegate, UI
     }
 }
     
-class ImageBoxView:UIImageView{
-   
-    override init(image: UIImage?) {
-       
-        
-        let screenSize: CGRect = UIScreen.main.bounds
-        let ws = screenSize.width / image!.size.width
-        let hs = screenSize.height / image!.size.height
-       
-        super.init(image: image)
-        self.contentMode = .scaleAspectFit
-        self.frame = CGRect(x:20,y: 50, width: image!.size.width * ws, height: image!.size.height * hs)
-        let overlayer = UIView(frame: self.frame)
-        overlayer.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        overlayer.layer.isHidden = false
-        overlayer.layer.borderColor = UIColor.gray.cgColor
-        overlayer.layer.borderWidth = 2.0
-        self.addSubview(overlayer)
-    }
-    required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-        }
-}

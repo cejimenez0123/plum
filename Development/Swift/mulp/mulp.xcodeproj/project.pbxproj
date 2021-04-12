@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3582EFA32620C72B00D47C53 /* ImageBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3582EFA22620C72B00D47C53 /* ImageBoxView.swift */; };
 		358F37C925F2CD1600F44CB7 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358F37C825F2CD1600F44CB7 /* CanvasViewController.swift */; };
 		359B6420260FAA5C00BD220D /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B641F260FAA5C00BD220D /* SlideInPresentationManager.swift */; };
 		359B6428260FAE1C00BD220D /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359B6427260FAE1C00BD220D /* SlideInPresentationController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3582EFA22620C72B00D47C53 /* ImageBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBoxView.swift; sourceTree = "<group>"; };
 		358F37C825F2CD1600F44CB7 /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
 		359B641F260FAA5C00BD220D /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
 		359B6427260FAE1C00BD220D /* SlideInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				35ABDB3F25E8359300FDD6E0 /* CanvasView.swift */,
 				359B64422610DF6600BD220D /* PageTableViewCell.swift */,
+				3582EFA22620C72B00D47C53 /* ImageBoxView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				359B64432610DF6600BD220D /* PageTableViewCell.swift in Sources */,
 				35ABDB0C25E8350600FDD6E0 /* mulp.xcdatamodeld in Sources */,
 				359B6428260FAE1C00BD220D /* SlideInPresentationController.swift in Sources */,
+				3582EFA32620C72B00D47C53 /* ImageBoxView.swift in Sources */,
 				359B6420260FAA5C00BD220D /* SlideInPresentationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,7 @@ import UIKit
 
 class MainViewController: UITableViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     var pages = [Page]()
+    
     let imagePicker = UIImagePickerController()
     @IBOutlet var BarButtonItem: UIBarButtonItem!
     
@@ -31,7 +32,10 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.dismiss(animated: true, completion:  { () -> Void in})
+            print(pages)
             pages.append(Page(id: UUID(), name: "Page", canvas: pickedImage))
+            self.tableView.reloadData()
+            print(pages)
         }
         
     }
@@ -41,18 +45,15 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PageTableViewCell", for: indexPath) as! PageTableViewCell
-        cell.pageName.text = pages[indexPath.row].name
+        let imageView = UIImageView()
+        let bounds = UIScreen.main.bounds
+       
+        imageView.image = pages[indexPath.row].canvas
+        imageView.frame = CGRect(x:0,y:0,width:bounds.size.width,height: imageView.image!.size.height)
+        cell.picture = imageView
         return cell
     }
-    
-//    @objc func addCanvas(for segue:UIStoryboardSegue,sender:Any?){
-//        let page =  Page(id: UUID(), name: "BEST", canvas: Canvas(image: nil, canvasView: CanvasView(frame: CGRect(x: 20, y: 20, width: 100, height: 100))))
-//        let viewcontroller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CanvasViewController") as? CanvasViewController
-//        viewcontroller?.name  = page.name
-//        viewcontroller?.CanvasView = page.canvas.canvasView
-//        navigationController?.pushViewController(viewcontroller! , animated: false)
-//
-//
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       

@@ -8,9 +8,11 @@
 import UIKit
 
 class PageTableViewCell: UITableViewCell {
-    @IBOutlet weak var pageName:UILabel!
+    @IBOutlet weak var pageName:UILabel?
+    @IBOutlet var picture:UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        picture.contentMode = .scaleAspectFit
         // Initialization code
     }
 
