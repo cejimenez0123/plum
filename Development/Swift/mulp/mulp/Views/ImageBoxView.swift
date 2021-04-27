@@ -22,14 +22,18 @@ class ImageBoxView:UIImageView{
 //        let hs = image!.size.height / screenSize.width
       
         super.init(image: image )
-
+        guard let image = self.image else {return }
+        let bound = UIScreen.main.bounds
+       let width = bound.width / 2 * image.getCropRatio()
+        let height =  width / image.getCropRatio()
+        self.frame = CGRect(x: 30,y:100,width:width,height:height)
             // topController should now be your topmost view controller
         let overlayer = UIView(frame:CGRect( x:0,y:0,width:  self.frame.width, height: self.frame.height ))
         overlayer.translatesAutoresizingMaskIntoConstraints = false
                 self.contentMode = .scaleAspectFit
         self.addSubview(overlayer)
 //        let bounds = UIScreen.main.bounds
-        self.frame = CGRect(x:5,y:120, width:image!.size.width/10 , height: image!.size.height/10 )
+        
         
         overlayer.backgroundColor = UIColor(white: 1, alpha: 0.0)
         let constraints = [overlayer.leftAnchor.constraint(equalTo: self.leftAnchor),
@@ -48,7 +52,7 @@ class ImageBoxView:UIImageView{
         let upLButton = UIView(frame: CGRect(x: -10, y: -10, width: buttonH, height: buttonH))
         let buttons = [upRButton,upLButton]
         let panGesture = UIPanGestureRecognizer(target: upRButton, action: #selector(self.handleCorner(_:)))
-        let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleDrag(_:)))
+        let dragGesture = UIPanGestureRecognizer(target: self.viewController?.view, action: #selector(self.handleDrag(_:)))
         for button in buttons {
             button.backgroundColor = UIColor(cgColor: CGColor(red: 0, green: 255, blue: 0, alpha: 1))
             
@@ -58,7 +62,7 @@ class ImageBoxView:UIImageView{
             button.layer.cornerRadius = 5
             overlayer.addSubview(button)
         }
-        overlayer.addGestureRecognizer(dragGesture)
+        self.addGestureRecognizer(dragGesture)
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -75,20 +79,47 @@ class ImageBoxView:UIImageView{
             gestureRecognizer.setTranslation(CGPoint.zero, in: piece.superview)
             }
         }
-    @objc func handleDrag(_ gestureRecognizer: UIPanGestureRecognizer){
-        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            let lastLocation = self.center
-            guard gestureRecognizer.view != nil else {return}
+    @objc func handleDrag(_ panGesture: UIPanGestureRecognizer){
+//        let lastLoaction = self.center
+        guard let view = panGesture.view else {return}
+        let translation = panGesture.translation(in: view)
         
-            let translation = gestureRecognizer.translation(in: self.viewController!.view)
-                // note: 'view' is optional and need to be unwrapped
-            self.center = CGPoint(x: lastLocation.x + translation.x, y: lastLocation.y + translation.y)
-                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
-            gestureRecognizer.setTranslation(CGPoint.zero, in: self.superview)
-    }
-    }
-    
+         
+
+            // create a new Label and give it the parameters of the old one
+        let label = panGesture.view as! UIImageView
+            label.center = CGPoint(x: label.center.x+translation.x, y: label.center.y+translation.y)
+        label.isMultipleTouchEnabled = true
+        label.isUserInteractionEnabled = true
+
+            if panGesture.state == UIGestureRecognizer.State.began {
+                // add something you want to happen when the Label Panning has started
+            }
+
+            if panGesture.state == UIGestureRecognizer.State.ended {
+                panGesture.setTranslation(CGPoint.zero, in: view)
+                // add something you want to happen when the Label Panning has ended
+            }
+
+            if panGesture.state == UIGestureRecognizer.State.changed {
+                // add something you want to happen when the Label Panning has been change ( during the moving/panning )
+            } else {
+                // or something when its not moving
+            }
+        }
+//        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+//            let lastLocation = self.center
+//            guard gestureRecognizer.view != nil else {return}
+//
+//            let translation = gestureRecognizer.translation(in: self.viewController!.view)
+//                // note: 'view' is optional and need to be unwrapped
+//            self.center = CGPoint(x: lastLocation.x + translation.x, y: lastLocation.y + translation.y)
+//                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
+//            gestureRecognizer.setTranslation(CGPoint.zero, in: self.superview)
 }
+    
+    
+
 
   
 
