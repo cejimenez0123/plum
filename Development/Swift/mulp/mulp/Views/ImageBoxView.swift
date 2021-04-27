@@ -21,16 +21,22 @@ class ImageBoxView:UIImageView{
 //       let ws = image!.size.width / screenSize.width
 //        let hs = image!.size.height / screenSize.width
       
+        super.init(image: image )
 
             // topController should now be your topmost view controller
-        
-        super.init(image: image )
-        self.contentMode = .scaleAspectFit
-        
+        let overlayer = UIView(frame:CGRect( x:0,y:0,width:  self.frame.width, height: self.frame.height ))
+        overlayer.translatesAutoresizingMaskIntoConstraints = false
+                self.contentMode = .scaleAspectFit
+        self.addSubview(overlayer)
 //        let bounds = UIScreen.main.bounds
         self.frame = CGRect(x:5,y:120, width:image!.size.width/10 , height: image!.size.height/10 )
-        let overlayer = UIView(frame:CGRect( x:0,y:0,width:  self.frame.width, height: self.frame.height ))
+        
         overlayer.backgroundColor = UIColor(white: 1, alpha: 0.0)
+        let constraints = [overlayer.leftAnchor.constraint(equalTo: self.leftAnchor),
+                           overlayer.rightAnchor.constraint(equalTo: self.rightAnchor),
+                           overlayer.topAnchor.constraint(equalTo: self.topAnchor),
+                           overlayer.bottomAnchor.constraint(equalTo: self.bottomAnchor)]
+        NSLayoutConstraint.activate(constraints)
         overlayer.isUserInteractionEnabled = true
         overlayer.layer.isHidden = false
         overlayer.clipsToBounds = true
@@ -53,7 +59,7 @@ class ImageBoxView:UIImageView{
             overlayer.addSubview(button)
         }
         overlayer.addGestureRecognizer(dragGesture)
-        self.addSubview(overlayer)
+        
     }
     required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
