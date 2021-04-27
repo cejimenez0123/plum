@@ -9,10 +9,28 @@ import UIKit
 
 class PageTableViewCell: UITableViewCell {
     @IBOutlet weak var pageName:UILabel?
-    @IBOutlet var picture:UIImageView!
+    @IBOutlet var picture:UIImageView! = {
+        var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style:style,reuseIdentifier: reuseIdentifier)
+        
+        self.addSubview(picture)
+        picture.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        picture.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        picture.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        picture.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+    }
+    required init?(coder: NSCoder) {
+        return nil
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
-        picture.contentMode = .scaleAspectFit
+        
         // Initialization code
     }
 

@@ -18,10 +18,12 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.tableView.register(PageTableViewCell.self, forCellReuseIdentifier: "PageTableViewCell")
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.rowHeight = UITableView.automaticDimension
         imagePicker.delegate = self
         title = "Hope"
-
-    }
+            }
     
     @IBAction func openImagePicker(_ sender: UIBarButtonItem) {
         imagePicker.allowsEditing = true
@@ -29,6 +31,7 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
                 
         present(imagePicker, animated: true, completion: nil)
     }
+  
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.dismiss(animated: true, completion:  { () -> Void in})
@@ -39,19 +42,33 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
         }
         
     }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pages.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    
         let cell = tableView.dequeueReusableCell(withIdentifier: "PageTableViewCell", for: indexPath) as! PageTableViewCell
-        let imageView = UIImageView()
-        let bounds = UIScreen.main.bounds
+    
        
-        imageView.image = pages[indexPath.row].canvas
-        imageView.frame = CGRect(x:0,y:0,width:bounds.size.width,height: imageView.image!.size.height)
-        cell.picture = imageView
+        cell.picture.image = pages[indexPath.row].canvas
+//        cell.addSubview(imageView)
+//        NSLayoutConstraint.activate([
+//          imageView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+//          imageView.topAnchor.constraint(equalTo: cell.topAnchor),
+//          imageView.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+//          imageView.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
+//        ])
+        
         return cell
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let currentImage  = pages[indexPath.row].canvas
+        let imageCrop = currentImage.getCropRatio()
+        return tableView.frame.width / imageCrop
     }
 
     
@@ -60,4 +77,10 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
         }
 
 
+}
+extension UIImage{
+    
+    func getCropRatio()->CGFloat{
+       return  CGFloat(self.size.width / self.size.height)
+    }
 }

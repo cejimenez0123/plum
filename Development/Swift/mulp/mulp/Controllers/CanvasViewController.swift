@@ -37,9 +37,10 @@ class CanvasViewController: UIViewController,UIImagePickerControllerDelegate, UI
             pickedImage.resizableImage(withCapInsets: inset)
                             
            
-            let panGesture = UIPanGestureRecognizer(target: self, action:(Selector(("handleDrag:"))))
+//            let panGesture = UIPanGestureRecognizer(target: self, action:(Selector(("handleDrag:"))))
             let imageView = ImageBoxView(image: pickedImage)
-            imageView.addGestureRecognizer(panGesture)
+            imageView.viewController = self
+            
                 view.addSubview(imageView)
             
         }

@@ -17,22 +17,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PageTableViewCell" rowHeight="313" id="I4C-Z5-wkx" customClass="PageTableViewCell" customModule="mulp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="313"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="800" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" selectionStyle="default" indentationWidth="10" reuseIdentifier="PageTableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="I4C-Z5-wkx" customClass="PageTableViewCell" customModule="mulp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="200"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I4C-Z5-wkx" id="Vdc-nO-aht">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="313"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Dancer1" translatesAutoresizingMaskIntoConstraints="NO" id="f5y-I2-jRa">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="313"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                    </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="picture" destination="f5y-I2-jRa" id="vlq-us-Z4l"/>
-                                </connections>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="U0i-G0-7ox"/>
+                                </constraints>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -127,7 +120,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Dancer1" width="254" height="198"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="pencil.slash" catalog="system" width="128" height="113"/>
         <image name="photo" catalog="system" width="128" height="93"/>
