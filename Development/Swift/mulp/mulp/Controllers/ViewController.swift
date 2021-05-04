@@ -55,20 +55,13 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
     
        
         cell.picture.image = pages[indexPath.row].canvas
-//        cell.addSubview(imageView)
-//        NSLayoutConstraint.activate([
-//          imageView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-//          imageView.topAnchor.constraint(equalTo: cell.topAnchor),
-//          imageView.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-//          imageView.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-//        ])
         
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let currentImage  = pages[indexPath.row].canvas
         let imageCrop = currentImage.getCropRatio()
-        return tableView.frame.width / imageCrop
+        return tableView.frame.width / imageCrop + 50
     }
 
     
