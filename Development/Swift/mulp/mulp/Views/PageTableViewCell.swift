@@ -9,7 +9,7 @@ import UIKit
 
 class PageTableViewCell: UITableViewCell {
     @IBOutlet weak var pageName:UILabel?
-    @IBOutlet var picture:UIImageView! = {
+     var picture:UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -19,6 +19,28 @@ class PageTableViewCell: UITableViewCell {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .red
+        let yeah = UILabel()
+        yeah.text = "Yeah"
+        yeah.textAlignment = NSTextAlignment.center
+        yeah.textColor = .white
+        let nah = UILabel()
+        nah.text = "Nah"
+        nah.textAlignment = NSTextAlignment.center
+        nah.textColor = .white
+        let buttonCon = UIView()
+        buttonCon.addSubview(yeah)
+        buttonCon.addSubview(nah)
+        buttonCon.backgroundColor = .white
+        view.addSubview(buttonCon)
+        
+        NSLayoutConstraint.activate(
+        [yeah.leftAnchor.constraint(greaterThanOrEqualTo: buttonCon.leftAnchor),
+        nah.leftAnchor.constraint(equalTo: yeah.rightAnchor),
+        nah.rightAnchor.constraint(equalTo:buttonCon.rightAnchor),
+        buttonCon.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),buttonCon.heightAnchor.constraint(equalTo: view.heightAnchor), buttonCon.topAnchor.constraint(equalTo: view.topAnchor),
+        buttonCon.bottomAnchor.constraint(equalTo:view.bottomAnchor),
+        yeah.topAnchor.constraint(equalTo:buttonCon.topAnchor),
+        yeah.bottomAnchor.constraint(equalTo: buttonCon.bottomAnchor)])
         return view
     }()
     
@@ -53,16 +75,12 @@ class PageTableViewCell: UITableViewCell {
                                         cellBox.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
 
         cellBox.heightAnchor.constraint(equalToConstant: 50)])
-    
-        picture.addConstraint(NSLayoutConstraint(item: self.picture!,
-                                                 attribute: NSLayoutConstraint.Attribute.height,
-                                                 relatedBy: NSLayoutConstraint.Relation.equal,
-                                                 toItem: self.picture!,
-                                                      attribute: NSLayoutConstraint.Attribute.width,
-                                                      multiplier:
-                                                        1,
-                                                      constant: 0))
-      
+        
+//
+//        if let pic = picture{
+//
+//            if let image = pic.image{
+        
 //        NSLayoutConstraint(item: self.yourview!,
 //                                                  attribute: NSLayoutAttribute.height,
 //                                                  relatedBy: NSLayoutRelation.equal,

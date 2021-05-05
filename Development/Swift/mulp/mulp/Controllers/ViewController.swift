@@ -55,12 +55,27 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
     
        
         cell.picture.image = pages[indexPath.row].canvas
+        var img: UIImage
+        if cell.picture.image != nil{
+            img = cell.picture.image!
+        }else{
+            img = pages[indexPath.row].canvas
+        }
         
+        cell.picture.addConstraint(NSLayoutConstraint(item: cell.picture,
+                                                 attribute: NSLayoutConstraint.Attribute.height,
+                                                 relatedBy: NSLayoutConstraint.Relation.equal,
+                                                 toItem: cell.picture,
+                                                      attribute: NSLayoutConstraint.Attribute.width,
+                                                      multiplier:  img.getCropHeight(),
+                                                      
+                                                      constant: 0))
+            
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let currentImage  = pages[indexPath.row].canvas
-        let imageCrop = currentImage.getCropRatio()
+        let imageCrop = currentImage.getCropWidth()
         return tableView.frame.width / imageCrop + 50
     }
 
@@ -73,7 +88,11 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
 }
 extension UIImage{
     
-    func getCropRatio()->CGFloat{
+    func getCropWidth()->CGFloat{
        return  CGFloat(self.size.width / self.size.height)
     }
+    func getCropHeight()->CGFloat{
+        return CGFloat(self.size.height / self.size.width)
+    }
+    
 }

@@ -24,8 +24,8 @@ class ImageBoxView:UIImageView{
         super.init(image: image )
         guard let image = self.image else {return }
         let bound = UIScreen.main.bounds
-       let width = bound.width / 2 * image.getCropRatio()
-        let height =  width / image.getCropRatio()
+       let width = bound.width / 2 * image.getCropWidth()
+        let height =  width / image.getCropWidth()
         self.frame = CGRect(x: 30,y:150,width:width,height:height)
             // topController should now be your topmost view controller
         let overlayer = UIView(frame:CGRect( x:0,y:0,width:  self.frame.width, height: self.frame.height ))
