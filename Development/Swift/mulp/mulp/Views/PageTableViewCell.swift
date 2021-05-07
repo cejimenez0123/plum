@@ -20,16 +20,18 @@ class PageTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .red
         let yeah = UIButton()
-        yeah.setTitle( "Yeah", for: .normal)
-        yeah.frame = CGRect(x:0,y:0,width:70,height:50)
-        yeah.backgroundColor = .blue
+            yeah.setTitle( "Yeah", for: .normal)
+            yeah.frame = CGRect(x:0,y:0,width:70,height:50)
+            yeah.backgroundColor = .blue
         let nah = UIButton()
-        nah.setTitle("Nah", for: .normal)
+            nah.setTitle("Nah", for: .normal)
+            nah.frame = CGRect(x:70,y:0, width: 70,height:50)
+            nah.backgroundColor = .green
         let buttonCon = UIView()
-        buttonCon.frame = CGRect(x:0,y:0,width: 140,height: 50)
-        buttonCon.addSubview(yeah)
-        buttonCon.addSubview(nah)
-        view.addSubview(buttonCon)
+            buttonCon.frame = CGRect(x:0,y:0,width: 140,height: 50)
+            buttonCon.addSubview(yeah)
+            buttonCon.addSubview(nah)
+    view.addSubview(buttonCon)
 //        NSLayoutConstraint.activate([
 //        buttonCon.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 //        buttonCon.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:  0.3),
