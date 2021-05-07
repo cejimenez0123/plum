@@ -19,19 +19,24 @@ class PageTableViewCell: UITableViewCell {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .red
-        let yeah = UILabel()
-        yeah.text = "Yeah"
-        yeah.textAlignment = NSTextAlignment.center
-        yeah.textColor = .white
-        let nah = UILabel()
-        nah.text = "Nah"
-        nah.textAlignment = NSTextAlignment.center
-        nah.textColor = .white
+        let yeah = UIButton()
+        yeah.setTitle( "Yeah", for: .normal)
+        yeah.frame = CGRect(x:0,y:0,width:70,height:50)
+        yeah.backgroundColor = .blue
+        let nah = UIButton()
+        nah.setTitle("Nah", for: .normal)
         let buttonCon = UIView()
+        buttonCon.frame = CGRect(x:0,y:0,width: 140,height: 50)
         buttonCon.addSubview(yeah)
         buttonCon.addSubview(nah)
-        buttonCon.backgroundColor = .white
         view.addSubview(buttonCon)
+//        NSLayoutConstraint.activate([
+//        buttonCon.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//        buttonCon.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:  0.3),
+//            buttonCon.heightAnchor.constraint(equalTo: view.heightAnchor)
+//        ])
+        buttonCon.backgroundColor = .white
+        
         
         NSLayoutConstraint.activate(
         [yeah.leftAnchor.constraint(greaterThanOrEqualTo: buttonCon.leftAnchor),
@@ -97,6 +102,9 @@ class PageTableViewCell: UITableViewCell {
 //        cellBox.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
 //        cellBox.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
 //        cellBox.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    func aYeah(){
+        
     }
     required init?(coder: NSCoder) {
         return nil
