@@ -70,14 +70,19 @@ class ImageBoxView:UIImageView{
 //        guard let view = gest.view else {
 //            return
 //        }
-        if gest.state == UIGestureRecognizer.State.began {
-        let translation = gest.translation(in: self.viewController?.view)
-            self.transform = CGAffineTransform(scaleX: translation.x, y: translation.y)}
+//        var originalTransform:CGFloat
+        if (gest.state == UIGestureRecognizer.State.began) {
+           var originalTransform = self.contentScaleFactor
+        }else if (gest.state == UIGestureRecognizer.State.changed){
         
-        if gest.state == UIGestureRecognizer.State.ended{
-            self.transform = CGAffineTransform.identity}
-
+            let translation = gest.translation(in: self.viewController?.view)
+            let scaley = 1.0 - (translation.y / 160)
+            let scalex = 1.0 - (translation.x / 160)
+            self.transform = CGAffineTransform(scaleX: scalex, y: scaley)
+            
         }
+        
+    }
     @objc func handleDrag(_ panGesture: UIPanGestureRecognizer){
 //        let lastLoaction = self.center
         guard let view = panGesture.view else {return}
