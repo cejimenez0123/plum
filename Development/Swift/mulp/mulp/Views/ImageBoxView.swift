@@ -47,22 +47,18 @@ class ImageBoxView:UIImageView{
         overlayer.clipsToBounds = true
         overlayer.layer.borderColor = UIColor.red.cgColor
         overlayer.layer.borderWidth = 2.0
-        let buttonH = bounds.width/13
+        let buttonH = 20
+        let buttonW  = 20
+    
+        let upLButton = UIView(frame: CGRect(x: -5, y: -5, width: buttonH, height: buttonW))
         
-        let upRButton =  UIView(frame: CGRect(x: overlayer.frame.maxX, y: overlayer.frame.minY, width: buttonH, height: buttonH))
-        let upLButton = UIView(frame: CGRect(x: -10, y: -10, width: buttonH, height: buttonH))
-        let buttons = [upRButton,upLButton]
-        let panGesture = UIPanGestureRecognizer(target: upRButton, action: #selector(self.handleCorner(_:)))
+        upLButton.backgroundColor = .green
+        overlayer.addSubview(upLButton)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleCorner(_:)))
         let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleDrag(_:)))
-        for button in buttons {
-            button.backgroundColor = UIColor(cgColor: CGColor(red: 0, green: 255, blue: 0, alpha: 1))
-            
-            button.isUserInteractionEnabled = true
-            button.addGestureRecognizer(panGesture)
+        upLButton.addGestureRecognizer(panGesture)
         
-            button.layer.cornerRadius = 5
-            overlayer.addSubview(button)
-        }
+        
         self.addGestureRecognizer(dragGesture)
         
     }
@@ -70,27 +66,31 @@ class ImageBoxView:UIImageView{
             super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
         }
-    @objc func handleCorner(_ gestureRecognizer: UIPanGestureRecognizer) {
-        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            guard gestureRecognizer.view != nil else {return}
-               let piece = gestureRecognizer.view!
-            let translation = gestureRecognizer.translation(in: piece.superview)
-                // note: 'view' is optional and need to be unwrapped
-                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
-            gestureRecognizer.setTranslation(CGPoint.zero, in: piece.superview)
-            }
+    @objc func handleCorner(_ gest: UIPanGestureRecognizer) {
+//        guard let view = gest.view else {
+//            return
+//        }
+        if gest.state == UIGestureRecognizer.State.began {
+        let translation = gest.translation(in: self.viewController?.view)
+            self.transform = CGAffineTransform(scaleX: translation.x, y: translation.y)}
+        
+        if gest.state == UIGestureRecognizer.State.ended{
+            self.transform = CGAffineTransform.identity}
+
         }
     @objc func handleDrag(_ panGesture: UIPanGestureRecognizer){
 //        let lastLoaction = self.center
         guard let view = panGesture.view else {return}
         let translation = panGesture.translation(in: self.viewController?.view)
 //        let image = panGesture.view as! UIImageView
+       
         view.center.x += translation.x
         view.center.y += translation.y
-        panGesture.setTranslation(CGPoint.zero, in: self.viewController?.view)
+            panGesture.setTranslation(CGPoint.zero, in: self.viewController?.view)}
+}
 //            image.center = CGPoint(x: image.center.x+translation.x, y: image.center.y+translation.y)
 //
-
+        
 //            if panGesture.state == UIGestureRecognizer.State.began {
 //                // add something you want to happen when the Label Panning has started
 //            }
@@ -105,7 +105,6 @@ class ImageBoxView:UIImageView{
 //            } else {
 //                // or something when its not moving
 //            }
-        }
 //        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
 //            let lastLocation = self.center
 //            guard gestureRecognizer.view != nil else {return}
@@ -115,7 +114,7 @@ class ImageBoxView:UIImageView{
 //            self.center = CGPoint(x: lastLocation.x + translation.x, y: lastLocation.y + translation.y)
 //                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
 //            gestureRecognizer.setTranslation(CGPoint.zero, in: self.superview)
-}
+
     
     
 

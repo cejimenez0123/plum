@@ -105,7 +105,10 @@ class PageTableViewCell: UITableViewCell {
 //        cellBox.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
 //        cellBox.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
-    func aYeah(){
+    func aYeah(button: UIButton){
+        
+    }
+    func aNah(button: UIButton){
         
     }
     required init?(coder: NSCoder) {
