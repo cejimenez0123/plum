@@ -50,19 +50,28 @@ class ImageBoxView:UIImageView{
         let botRButton = UIView()
         overlayer.addSubview(upRButton)
         overlayer.addSubview(upLButton)
+        overlayer.addSubview(botRButton)
+        overlayer.addSubview(botLButton)
         upLButton.translatesAutoresizingMaskIntoConstraints = false
         upRButton.translatesAutoresizingMaskIntoConstraints = false
-        downLButton
-        let buttonConstraints = [upRButton.widthAnchor.constraint(equalToConstant: 25),
+        botLButton.translatesAutoresizingMaskIntoConstraints = false
+        botRButton.translatesAutoresizingMaskIntoConstraints = false
+     let upRButtonConstraints = [upRButton.widthAnchor.constraint(equalToConstant: 25),
                                  upRButton.heightAnchor.constraint(equalToConstant: 25),
                                  upRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor),
                                  upRButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor)]
-    let upLButtonConstraints = [upLButton.widthAnchor.constraint(equalToConstant: 20),                         upLButton.heightAnchor.constraint(equalToConstant: 20),
-                                     upLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor),
-                                     upLButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor)
+    let upLButtonConstraints = [upLButton.widthAnchor.constraint(equalToConstant: 25),                         upLButton.heightAnchor.constraint(equalToConstant: 25),
+                                     upLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: 2),
+                                     upLButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor,constant: 2)
                                         ]
+        let botLButtonConstraints = [botLButton.widthAnchor.constraint(equalToConstant: 25),botLButton.heightAnchor.constraint(equalToConstant: 25),
+                                     botLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: 2),
+                                     botLButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 2)]
+        let botRButtonContraints = [botRButton.widthAnchor.constraint(equalToConstant: 25),botRButton.heightAnchor.constraint(equalToConstant: 25),botRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor, constant: 2),botRButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 2)]
+        
+        let buttonConstraints = upRButtonConstraints + upLButtonConstraints + botLButtonConstraints + botLButtonConstraints
         NSLayoutConstraint.activate(buttonConstraints)
-        NSLayoutConstraint.activate(upLButtonConstraints)
+       
 //
 //        let upLButton = UIView(frame: CGRect(x: -5, y: -5, width: buttonW, height: buttonH))
         upRButton.backgroundColor = .green
