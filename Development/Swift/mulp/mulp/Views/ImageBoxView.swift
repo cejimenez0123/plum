@@ -69,7 +69,7 @@ class ImageBoxView:UIImageView{
                                      botLButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 2)]
         let botRButtonContraints = [botRButton.widthAnchor.constraint(equalToConstant: 25),botRButton.heightAnchor.constraint(equalToConstant: 25),botRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor, constant: 2),botRButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 2)]
         
-        let buttonConstraints = upRButtonConstraints + upLButtonConstraints + botLButtonConstraints + botLButtonConstraints
+        let buttonConstraints = upRButtonConstraints + upLButtonConstraints + botLButtonConstraints + botRButtonContraints
         NSLayoutConstraint.activate(buttonConstraints)
        
 //
