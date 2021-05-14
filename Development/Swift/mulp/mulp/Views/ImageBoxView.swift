@@ -6,40 +6,35 @@
 //
 
 import UIKit
-enum Position{
-    case upRight,upLeft,downRight,downLeft, up, right,left, down
-}
+
 class ImageBoxView:UIImageView{
     var viewController:UIViewController?
+    var overlayer:UIView
     override init(image: UIImage?) {
+        overlayer = UIView()
         
-      
-
-//        let ws = screenSize.width / image!.size.width
-//        let hs = screenSize.height / image!.size.height
-      
-//       let ws = image!.size.width / screenSize.width
-//        let hs = image!.size.height / screenSize.width
-      
         super.init(image: image )
+        addHandles()
+        
+    }
+    func addHandles(){
+        
         guard let image = self.image else {return }
         let bound = UIScreen.main.bounds
        let width = bound.width / 2 * image.getCropWidth()
         let height =  width / image.getCropWidth()
         self.frame = CGRect(x: 30,y:150,width:width,height:height)
             // topController should now be your topmost view controller
-        let overlayer = UIView(frame:CGRect( x:0,y:0,width:  self.frame.width, height: self.frame.height ))
+       
+    
         overlayer.translatesAutoresizingMaskIntoConstraints = false
                 self.contentMode = .scaleAspectFit
         self.addSubview(overlayer)
-//        let bounds = UIScreen.main.bounds
-        
-        
         overlayer.backgroundColor = UIColor(white: 1, alpha: 0.0)
-        let constraints = [overlayer.leftAnchor.constraint(equalTo: self.leftAnchor),
-                           overlayer.rightAnchor.constraint(equalTo: self.rightAnchor),
-                           overlayer.topAnchor.constraint(equalTo: self.topAnchor),
-                           overlayer.bottomAnchor.constraint(equalTo: self.bottomAnchor)]
+        let constraints = [overlayer.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 3),
+                           overlayer.rightAnchor.constraint(equalTo: self.rightAnchor,constant: 3),
+                           overlayer.topAnchor.constraint(equalTo: self.topAnchor,constant: 3),
+                           overlayer.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 3)]
         NSLayoutConstraint.activate(constraints)
         self.isUserInteractionEnabled = true
         overlayer.isUserInteractionEnabled = true
@@ -47,38 +42,57 @@ class ImageBoxView:UIImageView{
         overlayer.clipsToBounds = true
         overlayer.layer.borderColor = UIColor.red.cgColor
         overlayer.layer.borderWidth = 2.0
-        let buttonH = 20
-        let buttonW  = 20
-    
-        let upLButton = UIView(frame: CGRect(x: -5, y: -5, width: buttonH, height: buttonW))
-        
-        upLButton.backgroundColor = .green
+//        let buttonH = CGFloat(20)
+//        let buttonW  = CGFloat(20)
+        let upRButton  = UIView()
+        let upLButton = UIView()
+        let botLButton = UIView()
+        let botRButton = UIView()
+        overlayer.addSubview(upRButton)
         overlayer.addSubview(upLButton)
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleCorner(_:)))
+        upLButton.translatesAutoresizingMaskIntoConstraints = false
+        upRButton.translatesAutoresizingMaskIntoConstraints = false
+        downLButton
+        let buttonConstraints = [upRButton.widthAnchor.constraint(equalToConstant: 25),
+                                 upRButton.heightAnchor.constraint(equalToConstant: 25),
+                                 upRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor),
+                                 upRButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor)]
+    let upLButtonConstraints = [upLButton.widthAnchor.constraint(equalToConstant: 20),                         upLButton.heightAnchor.constraint(equalToConstant: 20),
+                                     upLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor),
+                                     upLButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor)
+                                        ]
+        NSLayoutConstraint.activate(buttonConstraints)
+        NSLayoutConstraint.activate(upLButtonConstraints)
+//
+//        let upLButton = UIView(frame: CGRect(x: -5, y: -5, width: buttonW, height: buttonH))
+        upRButton.backgroundColor = .green
+        upLButton.backgroundColor = .green
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleScaling(_:)))
         let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleDrag(_:)))
         upLButton.addGestureRecognizer(panGesture)
         
-        
+        upRButton.addGestureRecognizer(panGesture)
         self.addGestureRecognizer(dragGesture)
         
     }
     required init?(coder aDecoder: NSCoder) {
+        overlayer = UIView()
             super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
         }
-    @objc func handleCorner(_ gest: UIPanGestureRecognizer) {
+    @objc func handleScaling(_ gest: UIPanGestureRecognizer) {
 //        guard let view = gest.view else {
 //            return
 //        }
 //        var originalTransform:CGFloat
         if (gest.state == UIGestureRecognizer.State.began) {
-           var originalTransform = self.contentScaleFactor
+            _ = self.contentScaleFactor
         }else if (gest.state == UIGestureRecognizer.State.changed){
         
             let translation = gest.translation(in: self.viewController?.view)
             let scaley = 1.0 - (translation.y / 160)
-            let scalex = 1.0 - (translation.x / 160)
-            self.transform = CGAffineTransform(scaleX: scalex, y: scaley)
+            _ = (translation.x / 160)
+            self.transform = CGAffineTransform(scaleX: scaley, y: scaley)
             
         }
         
