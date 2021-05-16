@@ -31,10 +31,10 @@ class ImageBoxView:UIImageView{
                 self.contentMode = .scaleAspectFit
         self.addSubview(overlayer)
         overlayer.backgroundColor = UIColor(white: 1, alpha: 0.0)
-        let constraints = [overlayer.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 3),
-                           overlayer.rightAnchor.constraint(equalTo: self.rightAnchor,constant: 3),
-                           overlayer.topAnchor.constraint(equalTo: self.topAnchor,constant: 3),
-                           overlayer.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 3)]
+        let constraints = [overlayer.leftAnchor.constraint(equalTo: self.leftAnchor,constant: -1),
+                           overlayer.rightAnchor.constraint(equalTo: self.rightAnchor,constant: 1),
+                           overlayer.topAnchor.constraint(equalTo: self.topAnchor,constant: -1),
+                           overlayer.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 1)]
         NSLayoutConstraint.activate(constraints)
         self.isUserInteractionEnabled = true
         overlayer.isUserInteractionEnabled = true
@@ -48,6 +48,10 @@ class ImageBoxView:UIImageView{
         let upLButton = UIView()
         let botLButton = UIView()
         let botRButton = UIView()
+        let buttons  = [upRButton,upLButton,botLButton,botRButton]
+        for but in buttons {
+            but.isUserInteractionEnabled = true
+        }
         overlayer.addSubview(upRButton)
         overlayer.addSubview(upLButton)
         overlayer.addSubview(botRButton)
@@ -56,18 +60,19 @@ class ImageBoxView:UIImageView{
         upRButton.translatesAutoresizingMaskIntoConstraints = false
         botLButton.translatesAutoresizingMaskIntoConstraints = false
         botRButton.translatesAutoresizingMaskIntoConstraints = false
-     let upRButtonConstraints = [upRButton.widthAnchor.constraint(equalToConstant: 25),
-                                 upRButton.heightAnchor.constraint(equalToConstant: 25),
-                                 upRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor),
-                                 upRButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor)]
-    let upLButtonConstraints = [upLButton.widthAnchor.constraint(equalToConstant: 25),                         upLButton.heightAnchor.constraint(equalToConstant: 25),
-                                     upLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: 2),
-                                     upLButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor,constant: 2)
+        
+     let upRButtonConstraints = [upRButton.widthAnchor.constraint(equalToConstant: 50),
+                                 upRButton.heightAnchor.constraint(equalToConstant: 50),
+                                 upRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor,constant: 5),
+                                 upRButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor,constant: -5)]
+    let upLButtonConstraints = [upLButton.widthAnchor.constraint(equalToConstant: 50),                         upLButton.heightAnchor.constraint(equalToConstant: 50),
+                                     upLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: -5),
+                                     upLButton.centerYAnchor.constraint(equalTo: overlayer.topAnchor,constant: -5)
                                         ]
-        let botLButtonConstraints = [botLButton.widthAnchor.constraint(equalToConstant: 25),botLButton.heightAnchor.constraint(equalToConstant: 25),
-                                     botLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: 2),
-                                     botLButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 2)]
-        let botRButtonContraints = [botRButton.widthAnchor.constraint(equalToConstant: 25),botRButton.heightAnchor.constraint(equalToConstant: 25),botRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor, constant: 2),botRButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 2)]
+        let botLButtonConstraints = [botLButton.widthAnchor.constraint(equalToConstant: 50),botLButton.heightAnchor.constraint(equalToConstant: 50),
+                                     botLButton.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: 5),
+                                     botLButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 5)]
+        let botRButtonContraints = [botRButton.widthAnchor.constraint(equalToConstant: 50),botRButton.heightAnchor.constraint(equalToConstant: 50),botRButton.centerXAnchor.constraint(equalTo: overlayer.rightAnchor, constant: 5),botRButton.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 5)]
         
         let buttonConstraints = upRButtonConstraints + upLButtonConstraints + botLButtonConstraints + botRButtonContraints
         NSLayoutConstraint.activate(buttonConstraints)
@@ -76,12 +81,15 @@ class ImageBoxView:UIImageView{
 //        let upLButton = UIView(frame: CGRect(x: -5, y: -5, width: buttonW, height: buttonH))
         upRButton.backgroundColor = .green
         upLButton.backgroundColor = .green
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleScaling(_:)))
+        botRButton.backgroundColor = .green
+        botLButton.backgroundColor = .green
+        let scalingGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleScaling(_:)))
         let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleDrag(_:)))
-        upLButton.addGestureRecognizer(panGesture)
-        
-        upRButton.addGestureRecognizer(panGesture)
-        self.addGestureRecognizer(dragGesture)
+        upLButton.addGestureRecognizer(scalingGesture)
+        upRButton.addGestureRecognizer(scalingGesture)
+        botRButton.addGestureRecognizer(scalingGesture)
+        botLButton.addGestureRecognizer(scalingGesture)
+        overlayer.addGestureRecognizer(dragGesture)
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -93,27 +101,28 @@ class ImageBoxView:UIImageView{
 //        guard let view = gest.view else {
 //            return
 //        }
-//        var originalTransform:CGFloat
-        if (gest.state == UIGestureRecognizer.State.began) {
-            _ = self.contentScaleFactor
-        }else if (gest.state == UIGestureRecognizer.State.changed){
+//
+      
         
             let translation = gest.translation(in: self.viewController?.view)
             let scaley = 1.0 - (translation.y / 160)
-            _ = (translation.x / 160)
-            self.transform = CGAffineTransform(scaleX: scaley, y: scaley)
             
-        }
+            self.transform = CGAffineTransform(scaleX: scaley, y: scaley)
+//        self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+        
         
     }
     @objc func handleDrag(_ panGesture: UIPanGestureRecognizer){
 //        let lastLoaction = self.center
-        guard let view = panGesture.view else {return}
+//        guard let view = panGesture.view else {return}
+//        if panGesture.state == .began{
+//            let location = panGesture.location(in: overlayer)
+//        }
         let translation = panGesture.translation(in: self.viewController?.view)
 //        let image = panGesture.view as! UIImageView
        
-        view.center.x += translation.x
-        view.center.y += translation.y
+        self.center.x += translation.x
+        self.center.y += translation.y
             panGesture.setTranslation(CGPoint.zero, in: self.viewController?.view)}
 }
 //            image.center = CGPoint(x: image.center.x+translation.x, y: image.center.y+translation.y)
