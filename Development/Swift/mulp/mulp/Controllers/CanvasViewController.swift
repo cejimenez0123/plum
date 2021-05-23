@@ -35,12 +35,17 @@ class CanvasViewController: UIViewController,UIImagePickerControllerDelegate, UI
             
             let inset = UIEdgeInsets(top: 12, left: 10, bottom: 12, right: 10)
             pickedImage.resizableImage(withCapInsets: inset)
-                            
+            let bound = UIScreen.main.bounds
+            let width = bound.width / 2 * (pickedImage.getCropWidth())
+            let height =  width / (pickedImage.getCropWidth())
            
 //            let panGesture = UIPanGestureRecognizer(target: self, action:(Selector(("handleDrag:"))))
-            let imageView = ImageBoxView(image: pickedImage)
+           let frame = CGRect(x: 30, y: 150, width: width, height: height)
+            let imageView = ImageBoxView(image:pickedImage, frame: frame)
+        
+        
             imageView.viewController = self
-          
+        
                 view.addSubview(imageView)
             
         }

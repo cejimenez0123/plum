@@ -7,43 +7,45 @@
 
 import UIKit
 
-class ImageBoxView:UIImageView{
+class ImageBoxView:UIView{
     
     
-    
+    var image: UIImage
     var viewController:UIViewController?
-    var overlayer = UIView()
+    
+    var handleLayer = UIView()
     let topRBut = UIView()
     let botRBut = UIView()
     let topLBut = UIView()
     let botLBut = UIView()
-    override init(image: UIImage?) {
+    required init(image:UIImage,frame:CGRect){
         
-        super.init(image: image )
+        self.image = image
+
+  
         
-        
-        
-        guard let image = self.image else {return }
-        let bound = UIScreen.main.bounds
-       let width = bound.width / 2 * image.getCropWidth()
-        let height =  width / image.getCropWidth()
-        self.frame = CGRect(x: 30,y:150,width:width,height:height)
+        super.init(frame: frame)
+        let imageView =  UIImageView(image:image )
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .red
+        self.addSubview(imageView)
+        let imageBoxConstraints = [imageView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -4),imageView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -4),imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)]
+        imageView.isUserInteractionEnabled = true
         self.isUserInteractionEnabled = true
-        overlayer.isUserInteractionEnabled = true
-        overlayer.translatesAutoresizingMaskIntoConstraints = false
-        overlayer.layer.isHidden = false
-        overlayer.clipsToBounds = true
-        overlayer.layer.borderColor = UIColor.red.cgColor
-        overlayer.layer.borderWidth = 2.0
-        self.addSubview(overlayer)
-        let constraints = [overlayer.leftAnchor.constraint(equalTo: self.leftAnchor,constant: -1),
-                           overlayer.rightAnchor.constraint(equalTo: self.rightAnchor,constant: 1),
-                           overlayer.topAnchor.constraint(equalTo: self.topAnchor,constant: -1),
-                           overlayer.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 1)]
+//        self.translatesAutoresizingMaskIntoConstraints = false
+//       self.layer.isHidden = false
+//        self.layer.borderColor = UIColor.red.cgColor
+//        self.layer.borderWidth = 2.0
+        imageView.addSubview(topRBut)
+        imageView.addSubview(topLBut)
+        imageView.addSubview(botRBut)
+        imageView.addSubview(botLBut)
+
         topRBut.translatesAutoresizingMaskIntoConstraints = false
         botRBut.translatesAutoresizingMaskIntoConstraints = false
         topLBut.translatesAutoresizingMaskIntoConstraints = false
         botLBut.translatesAutoresizingMaskIntoConstraints = false
+        
         topRBut.isUserInteractionEnabled = true
         botRBut.isUserInteractionEnabled = true
         topLBut.isUserInteractionEnabled = true
@@ -52,23 +54,21 @@ class ImageBoxView:UIImageView{
         botRBut.backgroundColor = .green
         topLBut.backgroundColor = .green
         botLBut.backgroundColor = .green
-        overlayer.addSubview(topRBut)
-        overlayer.addSubview(topLBut)
-        overlayer.addSubview(botLBut)
-        overlayer.addSubview(botRBut)
-        let topRButtonConstraints = [topRBut.widthAnchor.constraint(equalToConstant: 50),
-                                    topRBut.heightAnchor.constraint(equalToConstant: 50),
-                                    topRBut.centerXAnchor.constraint(equalTo: overlayer.rightAnchor,constant: 5),
-                                    topRBut.centerYAnchor.constraint(equalTo: overlayer.topAnchor,constant: -5)]
-       let topLButConstraints = [topLBut.widthAnchor.constraint(equalToConstant: 50),                         topLBut.heightAnchor.constraint(equalToConstant: 50),
-                                        topLBut.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: -5),
-                                        topLBut.centerYAnchor.constraint(equalTo: overlayer.topAnchor,constant: -5)
+ 
+    let topRButtonConstraints = [topRBut.widthAnchor.constraint(equalToConstant: 10),
+                                    topRBut.heightAnchor.constraint(equalToConstant: 10),
+                                    topRBut.centerXAnchor.constraint(equalTo:self.rightAnchor,constant: -3),
+                                    topRBut.centerYAnchor.constraint(equalTo: self.topAnchor,constant: 3)]
+    let topLButConstraints = [topLBut.widthAnchor.constraint(equalToConstant: 10),                         topLBut.heightAnchor.constraint(equalToConstant: 10),
+                                        topLBut.centerXAnchor.constraint(equalTo: self.leftAnchor, constant: 3),
+                                        topLBut.centerYAnchor.constraint(equalTo: self.topAnchor,constant: 3)
                                            ]
-           let botLButConstraints = [botLBut.widthAnchor.constraint(equalToConstant: 50),botLBut.heightAnchor.constraint(equalToConstant: 50),
-                                     botLBut.centerXAnchor.constraint(equalTo: overlayer.leftAnchor, constant: 5),
-                                        botLBut.centerYAnchor.constraint(equalTo: overlayer.bottomAnchor, constant: 5)]
-           let botRButContraints = [botRBut.widthAnchor.constraint(equalToConstant: 50),botRBut.heightAnchor.constraint(equalToConstant: 50),botRBut.centerXAnchor.constraint(equalTo: overlayer.rightAnchor, constant: 5),botRBut.centerYAnchor.constraint(equalTo:overlayer.bottomAnchor, constant: 5)]
-           let butContraints = topLButConstraints + topRButtonConstraints + botRButContraints + botLButConstraints
+    let botLButConstraints = [botLBut.widthAnchor.constraint(equalToConstant:10),
+                              botLBut.heightAnchor.constraint(equalToConstant: 10),
+                            botLBut.centerXAnchor.constraint(equalTo:self.leftAnchor, constant: 3),
+                                    botLBut.centerYAnchor.constraint(equalTo:self.bottomAnchor, constant:-3)]
+           let botRButContraints = [botRBut.widthAnchor.constraint(equalToConstant: 10),botRBut.heightAnchor.constraint(equalToConstant: 10),botRBut.centerXAnchor.constraint(equalTo: self.rightAnchor, constant:-3 ),botRBut.centerYAnchor.constraint(equalTo:self.bottomAnchor, constant:-3)]
+           let constraints = topLButConstraints + topRButtonConstraints + botRButContraints + botLButConstraints + imageBoxConstraints
         let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleDrag(_:)))
         let topRGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleTopR(_:)))
         let topLGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleTopL(_:)))
@@ -78,8 +78,8 @@ class ImageBoxView:UIImageView{
         topLBut.addGestureRecognizer(topLGesture)
         botRBut.addGestureRecognizer(botRGesture)
         botLBut.addGestureRecognizer(botLGesture)
-        overlayer.addGestureRecognizer(dragGesture)
-           NSLayoutConstraint.activate(butContraints)
+        self.addGestureRecognizer(dragGesture)
+    
         NSLayoutConstraint.activate(constraints)
         
     }
@@ -135,5 +135,6 @@ class ImageBoxView:UIImageView{
 
 }
 
-        
+
+
         
