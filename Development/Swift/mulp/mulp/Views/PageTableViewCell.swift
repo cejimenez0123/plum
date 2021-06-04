@@ -17,37 +17,57 @@ class PageTableViewCell: UITableViewCell {
     }()
     @IBOutlet var cellBox:UIView! = {
         var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .red
-        let yeah = UIButton()
-            yeah.setTitle( "Yeah", for: .normal)
-            yeah.frame = CGRect(x:0,y:0,width:70,height:50)
-            yeah.backgroundColor = .blue
-        let nah = UIButton()
-            nah.setTitle("Nah", for: .normal)
-            nah.frame = CGRect(x:70,y:0, width: 70,height:50)
-            nah.backgroundColor = .green
+        let commentButton = UIButton()
         let buttonCon = UIView()
-            buttonCon.frame = CGRect(x:0,y:0,width: 140,height: 50)
+        let yeah = UIButton()
+        let nah = UIButton()
+        let shareButton = UIButton()
+        view.addSubview(commentButton)
+        commentButton.translatesAutoresizingMaskIntoConstraints = false
+        yeah.translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = false
+        nah.translatesAutoresizingMaskIntoConstraints = false
+        shareButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonCon.translatesAutoresizingMaskIntoConstraints = false
+        buttonCon.backgroundColor = .black
+            //Buttons
+        
+            yeah.setTitle( "Yeah", for: .normal)
+            nah.setTitle("Nah", for: .normal)
+        yeah.backgroundColor = .blue
+        nah.backgroundColor = .red
+        //Button Container
+        
             buttonCon.addSubview(yeah)
             buttonCon.addSubview(nah)
-    view.addSubview(buttonCon)
-//        NSLayoutConstraint.activate([
-//        buttonCon.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//        buttonCon.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:  0.3),
-//            buttonCon.heightAnchor.constraint(equalTo: view.heightAnchor)
-//        ])
-        buttonCon.backgroundColor = .white
         
         
-        NSLayoutConstraint.activate(
-        [yeah.leftAnchor.constraint(greaterThanOrEqualTo: buttonCon.leftAnchor),
-        nah.leftAnchor.constraint(equalTo: yeah.rightAnchor),
-        nah.rightAnchor.constraint(equalTo:buttonCon.rightAnchor),
-        buttonCon.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),buttonCon.heightAnchor.constraint(equalTo: view.heightAnchor), buttonCon.topAnchor.constraint(equalTo: view.topAnchor),
-        buttonCon.bottomAnchor.constraint(equalTo:view.bottomAnchor),
-        yeah.topAnchor.constraint(equalTo:buttonCon.topAnchor),
-        yeah.bottomAnchor.constraint(equalTo: buttonCon.bottomAnchor)])
+        view.addSubview(buttonCon)
+ 
+            //Button Container constraits Yeah and Nah button below
+        NSLayoutConstraint.activate([buttonCon.leftAnchor.constraint(equalTo: view.leftAnchor),buttonCon.rightAnchor.constraint(equalTo: view.leftAnchor,constant:140),buttonCon.topAnchor.constraint(equalTo: view.topAnchor),buttonCon.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+        NSLayoutConstraint.activate([yeah.topAnchor.constraint(equalTo: buttonCon.topAnchor),yeah.bottomAnchor.constraint(equalTo: buttonCon.bottomAnchor),yeah.rightAnchor.constraint(equalTo: buttonCon.rightAnchor,constant: -60),yeah.leftAnchor.constraint(equalTo: buttonCon.leftAnchor)])
+        NSLayoutConstraint.activate([nah.topAnchor.constraint(equalTo: buttonCon.topAnchor),nah.bottomAnchor.constraint(equalTo: buttonCon.bottomAnchor),nah.rightAnchor.constraint(equalTo: buttonCon.rightAnchor),nah.leftAnchor.constraint(equalTo: yeah.rightAnchor)])
+
+        
+        
+        let commentIcon = UIImage(named:"CommentIcon")
+         commentButton.setImage(commentIcon,for: .normal)
+        
+        commentButton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        
+        commentButton.imageView?.contentMode = .scaleAspectFit
+        NSLayoutConstraint.activate([commentButton.heightAnchor.constraint(equalTo: view.heightAnchor),commentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),commentButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),commentButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+        let shareIcon = UIImage(named:"ShareIcon-1")
+        shareButton.setImage(shareIcon, for: .normal)
+        shareButton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        view.addSubview(shareButton)
+        
+        NSLayoutConstraint.activate([shareButton.leftAnchor.constraint(equalTo: view.rightAnchor,constant: -80),shareButton.rightAnchor.constraint(equalTo: view.rightAnchor),shareButton.topAnchor.constraint(equalTo: view.topAnchor),shareButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+        
+        
+        
+       
         return view
     }()
     
@@ -74,14 +94,18 @@ class PageTableViewCell: UITableViewCell {
                                         picture.topAnchor.constraint(equalTo: self.contentView.topAnchor),
 
         picture.bottomAnchor.constraint(equalTo: cellBox.topAnchor),
+                                        
+                                        cellBox.heightAnchor.constraint(equalToConstant:56),
         
-        cellBox.topAnchor.constraint(equalTo: picture.bottomAnchor),
+//        cellBox.topAnchor.constraint(equalTo: picture.bottomAnchor),
+                                        cellBox.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
+                                        cellBox.centerYAnchor.constraint(equalTo: picture.bottomAnchor, constant: 28),
+                                        cellBox.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)])
+//                                        cellBox.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
+//
+//                                        cellBox.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
 
-                                        cellBox.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-
-                                        cellBox.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
-
-        cellBox.heightAnchor.constraint(equalToConstant: 50)])
+//        cellBox.heightAnchor.constraint(equalToConstant: 50)])
         
 //
 //        if let pic = picture{

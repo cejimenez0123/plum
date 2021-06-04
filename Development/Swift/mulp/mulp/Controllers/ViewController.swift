@@ -76,7 +76,7 @@ class MainViewController: UITableViewController,UIImagePickerControllerDelegate,
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let currentImage  = pages[indexPath.row].canvas
         let imageCrop = currentImage.getCropWidth()
-        return tableView.frame.width / imageCrop + 50
+        return tableView.frame.width / imageCrop + 60
     }
 
     

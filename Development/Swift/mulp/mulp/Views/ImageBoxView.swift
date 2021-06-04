@@ -11,25 +11,26 @@ class ImageBoxView:UIView{
     
     
     var image: UIImage
-    var viewController:UIViewController?
-    
+    var viewController:UIViewController
+    var imageView: UIImageView
     var handleLayer = UIView()
     let topRBut = UIView()
     let botRBut = UIView()
     let topLBut = UIView()
     let botLBut = UIView()
-    required init(image:UIImage,frame:CGRect){
+    required init(image:UIImage,frame:CGRect,viewController: UIViewController){
         
         self.image = image
-
+        self.viewController = viewController
   
-        
+         imageView =  UIImageView(image:image )
         super.init(frame: frame)
-        let imageView =  UIImageView(image:image )
+        self.viewController.view.addSubview(self)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .red
         self.addSubview(imageView)
-        let imageBoxConstraints = [imageView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -4),imageView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -4),imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)]
+        let selfConstraints = [self.widthAnchor.constraint(equalTo: self.imageView.widthAnchor),self.heightAnchor.constraint(equalTo: self.imageView.heightAnchor),self.centerXAnchor.constraint(lessThanOrEqualTo: self.viewController.view.centerXAnchor, constant: 0),self.centerYAnchor.constraint(lessThanOrEqualTo: self.viewController.view.centerYAnchor, constant: 0)]
+        let imageBoxConstraints = [imageView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: 0),imageView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0),imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)]
         imageView.isUserInteractionEnabled = true
         self.isUserInteractionEnabled = true
 //        self.translatesAutoresizingMaskIntoConstraints = false
@@ -55,8 +56,8 @@ class ImageBoxView:UIView{
         topLBut.backgroundColor = .green
         botLBut.backgroundColor = .green
  
-    let topRButtonConstraints = [topRBut.widthAnchor.constraint(equalToConstant: 10),
-                                    topRBut.heightAnchor.constraint(equalToConstant: 10),
+        let topRButtonConstraints = [topRBut.widthAnchor.constraint(equalTo: self.viewController.view.widthAnchor,multiplier: 0.5),
+                                    topRBut.heightAnchor.constraint(equalTo: self.viewController.view.widthAnchor,multiplier: 0.5),
                                     topRBut.centerXAnchor.constraint(equalTo:self.rightAnchor,constant: -3),
                                     topRBut.centerYAnchor.constraint(equalTo: self.topAnchor,constant: 3)]
     let topLButConstraints = [topLBut.widthAnchor.constraint(equalToConstant: 10),                         topLBut.heightAnchor.constraint(equalToConstant: 10),
@@ -68,7 +69,7 @@ class ImageBoxView:UIView{
                             botLBut.centerXAnchor.constraint(equalTo:self.leftAnchor, constant: 3),
                                     botLBut.centerYAnchor.constraint(equalTo:self.bottomAnchor, constant:-3)]
            let botRButContraints = [botRBut.widthAnchor.constraint(equalToConstant: 10),botRBut.heightAnchor.constraint(equalToConstant: 10),botRBut.centerXAnchor.constraint(equalTo: self.rightAnchor, constant:-3 ),botRBut.centerYAnchor.constraint(equalTo:self.bottomAnchor, constant:-3)]
-           let constraints = topLButConstraints + topRButtonConstraints + botRButContraints + botLButConstraints + imageBoxConstraints
+        let constraints = topLButConstraints + topRButtonConstraints + botRButContraints + botLButConstraints + imageBoxConstraints + selfConstraints
         let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleDrag(_:)))
         let topRGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleTopR(_:)))
         let topLGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleTopL(_:)))
@@ -83,25 +84,27 @@ class ImageBoxView:UIView{
         NSLayoutConstraint.activate(constraints)
         
     }
-//        addHandles()
     @objc func handleDrag(_ panGesture: UIPanGestureRecognizer)->(){
-            let translation = panGesture.translation(in: self.viewController?.view)
+            let translation = panGesture.translation(in: self.viewController.view)
 
         self.center.x += translation.x
             self.center.y += translation.y
-            panGesture.setTranslation(CGPoint.zero, in: self.viewController?.view)
+            panGesture.setTranslation(CGPoint.zero, in: self.viewController.view)
         
     }
     @objc func handleTopR(_ gest: UIPanGestureRecognizer) {
-                let translation = gest.translation(in: self.viewController?.view)
+                let translation = gest.translation(in: self.viewController.view)
                 let scaley = 1.0 - (translation.y / 160)
-                self.transform = CGAffineTransform(scaleX: scaley, y: scaley)
-    //        self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+        let scalex = 1.0 - (translation.x / 100)
+        imageView.transform = CGAffineTransform(scaleX: scalex, y: scaley)
+        self.transform = CGAffineTransform(scaleX: scalex, y: scaley)
+        
+//            self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
     
     
         }
     @objc func handleTopL(_ gest: UIPanGestureRecognizer) {
-                let translation = gest.translation(in: self.viewController?.view)
+                let translation = gest.translation(in: self.viewController.view)
                 let scaley = 1.0 - (translation.y / 160)
                 self.transform = CGAffineTransform(scaleX: scaley, y: scaley)
     //        self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
@@ -109,15 +112,16 @@ class ImageBoxView:UIView{
     
         }
     @objc func handleBotR(_ gest: UIPanGestureRecognizer) {
-                let translation = gest.translation(in: self.viewController?.view)
+                let translation = gest.translation(in: self.viewController.view)
         let scaley = 1.0 + (translation.y / 160)
         self.transform = CGAffineTransform(scaleX: scaley, y: scaley)
+        self.setNeedsLayout()
     //        self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
     
     
         }
     @objc func handleBotL(_ gest: UIPanGestureRecognizer) {
-                let translation = gest.translation(in: self.viewController?.view)
+                let translation = gest.translation(in: self.viewController.view)
         let scaley =  1.0 + (translation.y / 160)
         self.transform = CGAffineTransform(scaleX: scaley, y: scaley)
     //        self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)

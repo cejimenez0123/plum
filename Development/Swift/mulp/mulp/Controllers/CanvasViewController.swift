@@ -41,12 +41,12 @@ class CanvasViewController: UIViewController,UIImagePickerControllerDelegate, UI
            
 //            let panGesture = UIPanGestureRecognizer(target: self, action:(Selector(("handleDrag:"))))
            let frame = CGRect(x: 30, y: 150, width: width, height: height)
-            let imageView = ImageBoxView(image:pickedImage, frame: frame)
+            let _ = ImageBoxView(image:pickedImage, frame: frame,viewController: self)
         
         
-            imageView.viewController = self
+           
         
-                view.addSubview(imageView)
+                
             
         }
     }
